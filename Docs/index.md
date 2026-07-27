@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: 源码仓库（GitHub）
       link: https://github.com/newStu/UE5
+    - theme: alt
+      text: 入门视频教程
+      link: https://www.bilibili.com/video/BV1qYSvBHELW/?p=21
 
 features:
   - icon: 🏃
@@ -39,3 +42,5 @@ features:
     details: 碰撞触发死亡、检查点重生、胜利结算的完整游戏闭环流程。
     link: /6.角色死亡设置/角色死亡设置
 ---
+
+> 📺 **编写说明**：本工程与文档跟随 B 站视频教程 [《【最新版 5.7】UE5 零基础入门教程》](https://www.bilibili.com/video/BV1qYSvBHELW) 学习整理而成，按章节逐步实操记录。感谢 UP 主的优质教程。
