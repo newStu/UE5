@@ -1,0 +1,78 @@
+name: Deploy VitePress site to Pages
+
+on:
+  # 推送到 master 时自动构建部署。
+  push:
+    branches: [master]
+  # 允许在 Actions 页手动触发。
+  workflow_dispatch:
+
+# Pages 部署所需权限。
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署，避免并发互相覆盖。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # lastUpdated 需要 git 完整历史。
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          # 未启用 cache：本仓库未提交 package-lock.json（本机未装 Node 无法生成）。
+          # 依赖只有 vitepress 一个，install 很快。若以后提交了 lock 文件，可加回 `cache: npm`。
+
+      - name: Install dependencies
+        run: npm install
+
+      # 按仓库名自动算出 VitePress 的 base 路径：
+      #   <user>.github.io 仓库  → '/'
+      #   其他仓库              → '/<repo>/'
+      - name: Compute base path
+        id: base
+        run: |
+          repo="${{ github.repository }}"
+          repo_name="${repo#*/}"
+          if [[ "$repo_name" == *.github.io ]]; then
+            echo "base_path=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "base_path=/$repo_name/" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build with VitePress
+        run: npm run docs:build
+        env:
+          BASE_PATH: ${{ steps.base.outputs.base_path }}
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Docs/.vitepress/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

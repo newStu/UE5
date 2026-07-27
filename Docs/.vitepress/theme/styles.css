@@ -1,0 +1,17 @@
+/* 图片点击放大（medium-zoom）相关样式 */
+
+/* 鼠标悬停在正文图片上时，光标提示「可点击放大」。 */
+.vp-doc img {
+  cursor: zoom-in;
+}
+
+/* 放大的遮罩层与放大后的图片，层级必须高于 VitePress 的顶部导航 / 侧边栏 / 本地大纲，
+   否则它们会盖住放大后的图 —— 这是 medium-zoom 默认 z-index=100 不够用的典型坑。
+   拉到 9999 / 10000，稳稳盖过 VitePress 所有固定层。 */
+.medium-zoom-overlay {
+  z-index: 9999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 10000;
+}
