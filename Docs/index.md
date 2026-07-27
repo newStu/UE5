@@ -10,8 +10,8 @@ hero:
       text: 开始阅读
       link: /1.创建角色移动/创建角色移动
     - theme: alt
-      text: 源码仓库（Gitee）
-      link: https://gitee.com/wangzhaoyv/ue5
+      text: 源码仓库（GitHub）
+      link: https://github.com/newStu/UE5
 
 features:
   - icon: 🏃
