@@ -1,9 +1,9 @@
 name: Deploy VitePress site to Pages
 
 on:
-  # 推送到 master 时自动构建部署。
+  # 推送到 main 时自动构建部署。
   push:
-    branches: [master]
+    branches: [main]
   # 允许在 Actions 页手动触发。
   workflow_dispatch:
 
