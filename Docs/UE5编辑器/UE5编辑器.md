@@ -1,6 +1,60 @@
 # UE5 编辑器
 
-本节收集 UE5 编辑器里三个很实用但不太显眼的操作，以及一份按场景分类的**常用快捷键速查表**。前三小节分别解决「一次给蓝图加多个网格体」「从任意位置直接运行游戏测试」「蓝图引脚的断线 / 拆分 / 查值」这三个高频需求；后面的快捷键表覆盖视口导航、变换工具、蓝图编辑、内容浏览器和运行测试这几类日常操作，熟悉它们可以显著加快搭建与调试的速度。
+本节先给出贯穿整个工程的 **UE5 资产命名规范**（各类资产的前缀约定），再介绍编辑器里三个很实用但不太显眼的操作，最后附上一份按场景分类的**常用快捷键速查表**。命名规范统一了前缀，让内容浏览器里的资产一眼可辨；三个小操作分别解决「一次给蓝图加多个网格体」「从任意位置直接运行游戏测试」「蓝图引脚的断线 / 拆分 / 查值」这三个高频需求；快捷键表覆盖视口导航、变换工具、蓝图编辑、内容浏览器和运行测试这几类日常操作，熟悉它们可以显著加快搭建与调试的速度。
+
+---
+
+## 资产命名规范
+
+UE5 采用「**前缀 + 描述性名称**」的方式命名资产：前缀代表资产类型，名称用 **PascalCase**（每个单词首字母大写、不留空格、不加分隔符）。这样在内容浏览器里一眼就能看出每个资产是什么，也避免不同类型的资产混在一起难以检索。本工程就严格遵循了这套约定，例如 `BP_Cube`、`SM_Stone_03`。
+
+**蓝图（最重要的一类）：**
+
+| 前缀 | 类型 | 示例 |
+| --- | --- | --- |
+| `BP_` | 蓝图类（Blueprint Class） | `BP_Cube`、`BP_ChallengeCharacter` |
+| `WBP_` | 控件蓝图 / UMG 界面（Widget Blueprint） | `WBP_MainMenu`、`WBP_HUD` |
+| `ABP_` | 动画蓝图（Animation Blueprint） | `ABP_Player` |
+| `BPI_` | 蓝图接口（Blueprint Interface） | `BPI_Interactable` |
+| `BPC_` | 蓝图组件（Blueprint Component） | `BPC_Health` |
+
+**网格体 / 材质 / 贴图：**
+
+| 前缀 | 类型 | 示例 |
+| --- | --- | --- |
+| `SM_` | 静态网格体（Static Mesh） | `SM_Stone_03`、`SM_WoodenPole_05` |
+| `SK_` | 骨骼网格体（Skeletal Mesh） | `SK_Player` |
+| `M_` | 材质（Material） | `M_Water` |
+| `MI_` | 材质实例（Material Instance） | `MI_Water_Blue` |
+| `MF_` | 材质函数（Material Function） | `MF_RoundCorner` |
+| `T_` | 贴图（Texture） | `T_Stone_D`（D=漫反射）、`T_Stone_N`（N=法线） |
+
+**动画 / 特效：**
+
+| 前缀 | 类型 | 示例 |
+| --- | --- | --- |
+| `A_` / `Anim_` | 动画序列（Anim Sequence） | `A_Jump_Start`、`A_Jump_Loop` |
+| `BS_` | 混合空间（Blend Space） | `BS_Locomotion` |
+| `NS_` | Niagara 特效系统 | `NS_Fire` |
+| `NE_` | Niagara 发射器 | `NE_Sparks` |
+
+**增强输入（本工程使用）：**
+
+| 前缀 | 类型 | 示例 |
+| --- | --- | --- |
+| `IA_` | 输入动作（Input Action） | `IA_Move`、`IA_Jump` |
+| `IMC_` | 输入映射上下文（Input Mapping Context） | `IMC_Default` |
+
+**其他常用：**
+
+| 前缀 | 类型 | 示例 |
+| --- | --- | --- |
+| `L_` / `MAP_` | 关卡 / 地图（Level） | `L_InitMap` |
+| `DT_` | 数据表（Data Table） | `DT_Item` |
+| `E_` | 枚举（Enum） | `E_MovementState` |
+| `S_` | 结构体（Struct） | `S_WeaponData` |
+
+> 命名小贴士：名称要能体现用途，避免 `BP_New`、`BP_1` 这类无意义命名；同类资产保持前缀与风格一致，方便日后检索和团队协作。本工程后续所有章节创建的资产都应遵循上表的前缀约定。
 
 ---
 

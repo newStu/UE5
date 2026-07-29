@@ -45,6 +45,7 @@ export default defineConfig({
         items: [
           { text: 'UE5 编辑器', link: '/UE5编辑器/UE5编辑器' },
           { text: '特殊节点', link: '/特殊节点/特殊节点' },
+          { text: '数学知识', link: '/数学知识/数学知识' },
         ],
       },
     ],
@@ -77,6 +78,7 @@ export default defineConfig({
         items: [
           { text: 'UE5 编辑器', link: '/UE5编辑器/UE5编辑器' },
           { text: '特殊节点', link: '/特殊节点/特殊节点' },
+          { text: '数学知识', link: '/数学知识/数学知识' },
         ],
       },
     ],
