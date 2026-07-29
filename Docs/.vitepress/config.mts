@@ -73,6 +73,14 @@ export default defineConfig({
       { text: '8. 检查点制作', link: '/8.检查点制作/检查点制作' },
       { text: '9. 游戏胜利', link: '/9.游戏胜利/游戏胜利' },
       {
+        text: '10. 蓝图通讯',
+        collapsed: false,
+        items: [
+          { text: '10.1 蓝图接口', link: '/10.蓝图通讯/蓝图接口/蓝图接口' },
+          { text: '10.2 事件分发器', link: '/10.蓝图通讯/事件分发器/事件分发器' },
+        ],
+      },
+      {
         text: '参考资料',
         collapsed: false,
         items: [
