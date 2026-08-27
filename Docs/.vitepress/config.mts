@@ -44,6 +44,7 @@ export default defineConfig({
         text: '参考资料',
         items: [
           { text: 'UE5 编辑器', link: '/UE5编辑器/UE5编辑器' },
+          { text: 'UE5 建模模式', link: '/UE5建模模式/UE5建模模式' },
           { text: '特殊节点', link: '/特殊节点/特殊节点' },
           { text: '数学知识', link: '/数学知识/数学知识' },
         ],
@@ -85,6 +86,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: 'UE5 编辑器', link: '/UE5编辑器/UE5编辑器' },
+          { text: 'UE5 建模模式', link: '/UE5建模模式/UE5建模模式' },
           { text: '特殊节点', link: '/特殊节点/特殊节点' },
           { text: '数学知识', link: '/数学知识/数学知识' },
         ],
