@@ -100,6 +100,13 @@ DerivedDataCache/
 
 # 兜底：防止误把超大单文件提交进来（再次显式忽略常见大资产扩展名所在的可疑目录，
 # 注意：不忽略 *.uasset 本身，否则会连蓝图一起忽略；靠上面的 Content 白名单控制粒度）。
+#
+# 2026-08-27：从提交中剔除的超大纹理（超过 GitHub 100MB 单文件硬限制，磁盘保留、不入库）
+MaterialDemo/Content/Code/MAT/贴图/T_uh1nbhzlw_8K_N.uasset
+MaterialDemo/Content/Code/MAT/贴图/T_uh1nbhzlw_8K_B.uasset
+MaterialDemo/Content/Code/MAT/贴图/T_tj2xahsbw_8K_B.uasset
+# 材质2/纹理 下的 .png 源图与同名 .uasset 内容重复（约 120MB），只留 .uasset
+MaterialDemo/Content/Code/MAT/材质2/纹理/*.png
 
 # ===== VitePress 文档站 =====
 node_modules/
