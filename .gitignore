@@ -98,6 +98,11 @@ DerivedDataCache/
 !**/Content/ThirdPerson/
 !**/Content/Variant_Combat/
 
+# 白名单：小资产专用上传目录 —— 想随仓库提交的小体积资源，
+# 放进任意工程的 Content/Upload/ 即可被跟踪（所有工程通用）。
+# 注意：GitHub 单文件硬限制 100MB，超大文件仍不要放进来。
+!**/Content/Upload/
+
 # 兜底：防止误把超大单文件提交进来（再次显式忽略常见大资产扩展名所在的可疑目录，
 # 注意：不忽略 *.uasset 本身，否则会连蓝图一起忽略；靠上面的 Content 白名单控制粒度）。
 #
