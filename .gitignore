@@ -121,3 +121,6 @@ Docs/.vitepress/dist/
 # Claude Code 本地权限配置（机器私有，不入库）
 .claude/settings.local.json
 
+
+# JetBrains Rider/IDEA 个人配置（机器私有，不入库）
+.idea/

@@ -4,7 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
+#include "InputMappingContext.h"
+#include "InputAction.h"
 #include "PlayerCharacter.generated.h"
+
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class MYTHIRD_API APlayerCharacter : public ACharacter
@@ -21,10 +27,10 @@ protected:
 	
 	
 	UPROPERTY(EditAnywhere)
-	float testLen;
+	float testLen = 100.f;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
-	float testLenBlueprint;
+	float testLenBlueprint = 0.f;
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void TestFunction();
@@ -34,6 +40,29 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Combat")
 	void MyBlueprintEvent();
+
+	void Look(const FInputActionValue& Value);
+	void Move(const FInputActionValue& Value);
+
+private: 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USpringArmComponent> CameraBoom;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UCameraComponent> PlayerCamera;
+	
+	
+	// Input
+	UPROPERTY(EditDefaultsOnly, Category= "Input")
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, Category= "Input")
+	TObjectPtr<UInputAction> MoveAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category= "Input")
+	TObjectPtr<UInputAction> LookAction;
+	
 
 public:	
 	// Called every frame
