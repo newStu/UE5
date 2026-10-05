@@ -1,0 +1,18 @@
+# C++ 笔记
+
+UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝图章节做过的东西（角色移动、输入绑定、组件、死亡重生）逐个用 C++ 重新实现一遍，并补充蓝图视角看不到的底层机制。
+
+## 目录
+
+| 章节 | 内容 | 对照蓝图章节 |
+|---|---|---|
+| [1. Character 与 GameMode 的 C++ 实现](/C++/1.Character与GameMode的C++实现.html) | 新建 C++ 类、GameMode 指定默认 Pawn、构造函数配置组件与参数、生命周期入口对照 | 1. 创建角色移动 |
+| [2. 增强输入系统的 C++ 绑定](/C++/2.增强输入系统的C++绑定.html) | IA / IMC 引用、AddMappingContext、BindAction 与 ETriggerEvent、Move / Look 实现 | 1. 创建角色移动（输入部分） |
+| [3. 组件编写与生命周期](/C++/3.组件编写与生命周期.html) | 组件三基类、CreateDefaultSubobject、自定义组件、Actor 生命周期、组件委托（事件分发器） | 3. 第三人称角色移动、10. 蓝图通讯 |
+| [4. 常用宏与反射](/C++/4.常用宏与反射.html) | UPROPERTY / UFUNCTION / UCLASS / USTRUCT / UENUM 说明符速查与常见坑 | —（C++ 基础设施） |
+
+## 学习建议
+
+- 每章代码都能在 `MyThird/Source/MyThird/` 里找到对应文件，建议边读边改边编译验证；
+- 蓝图章节的成果（IA / IMC 资产、角色蓝图）在 C++ 版里继续复用——C++ 与蓝图是混用关系，不是替换；
+- 遇到宏相关报错（`.generated.h`、`GENERATED_BODY`）先翻 [第 4 章](/C++/4.常用宏与反射.html)的"常见坑汇总"。

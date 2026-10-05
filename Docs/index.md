@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 开始阅读
-      link: /1.创建角色移动/创建角色移动
+      link: /蓝图/1.创建角色移动/创建角色移动
     - theme: alt
       text: 源码仓库（GitHub）
       link: https://github.com/newStu/UE5
@@ -20,31 +20,31 @@ features:
   - icon: 🏃
     title: 1. 创建角色移动
     details: 自定义 GameMode / Character，绑定增强输入系统（IA / IMC），实现 WASD 移动 + 鼠标视角。
-    link: /1.创建角色移动/创建角色移动
+    link: /蓝图/1.创建角色移动/创建角色移动
   - icon: 🎞️
     title: 2. 动画系统
     details: AnimBP + Blend Space，按角色水平速度在站立 / 奔跑之间自动混合。
-    link: /2.动画创建/动画创建
+    link: /蓝图/2.动画创建/动画创建
   - icon: 🎥
     title: 3. 第三人称视角
     details: SpringArm + Camera 挂载，基于相机朝向的移动与视角控制。
-    link: /3.第三人称角色移动/第三人称角色移动
+    link: /蓝图/3.第三人称角色移动/第三人称角色移动
   - icon: 🦘
     title: 4. 跳跃状态机
     details: Jump_Start / Jump_Loop / Jump_End 三态切换，由 Z 轴速度驱动。
-    link: /4.角色跳跃/角色跳跃
+    link: /蓝图/4.角色跳跃/角色跳跃
   - icon: 🎪
     title: 5. 场景机关
     details: 大摆锤、跷跷板、旋转指针、妙笔生花、蹦床、滚木六类机关搭建。
-    link: /5.制作场景地图/5.1制作大摆锤/制作大摆锤
+    link: /蓝图/5.制作场景地图/5.1制作大摆锤/制作大摆锤
   - icon: 🏁
     title: 6. 死亡 / 重生 / 胜利
     details: 碰撞触发死亡、检查点重生、胜利结算的完整游戏闭环流程。
-    link: /6.角色死亡设置/角色死亡设置
+    link: /蓝图/6.角色死亡设置/角色死亡设置
   - icon: 📡
     title: 10. 蓝图通讯
     details: 蓝图接口与事件分发器两种解耦方式——接口点名调用、分发器一对多广播。
-    link: /10.蓝图通讯/蓝图接口/蓝图接口
+    link: /蓝图/10.蓝图通讯/蓝图接口/蓝图接口
 ---
 
 > 📺 **编写说明**：本工程与文档跟随 B 站视频教程 [《【最新版 5.7】UE5 零基础入门教程》](https://www.bilibili.com/video/BV1qYSvBHELW) 学习整理而成，按章节逐步实操记录。感谢 UP 主的优质教程。
