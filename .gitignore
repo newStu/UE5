@@ -124,3 +124,6 @@ Docs/.vitepress/dist/
 
 # JetBrains Rider/IDEA 个人配置（机器私有，不入库）
 .idea/
+
+# 根目录误生成的 VitePress 缓存（在错误目录启动 dev server 时产生）
+/.vitepress/
