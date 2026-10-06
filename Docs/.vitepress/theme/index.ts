@@ -4,6 +4,7 @@ import { onMounted, watch, nextTick } from 'vue'
 import { useRoute, useData } from 'vitepress'
 import mediumZoom, { type Zoom } from 'medium-zoom'
 import Video from './components/Video.vue'
+import Layout from './Layout.vue'
 import './styles.css'
 
 // 保存 medium-zoom 实例，路由切换时先 detach 再重新 attach，
@@ -20,98 +21,59 @@ const initZoom = () => {
   })
 }
 
-// ---------- Mermaid 图表浏览器端渲染（自托管，同 medium-zoom 的接入方式） ----------
-// ```mermaid 代码块在构建期不做任何处理（mermaid 不进打包流程，避免构建期风险），
-// 页面加载后按需请求 /mermaid.min.js（Docs/public/ 下的官方单文件产物），
-// 把 code.language-mermaid 替换为渲染出的 SVG。渲染失败时保留源码，方便排查语法错误。
+// ---------- Mermaid 图表浏览器端渲染 ----------
+// 实际的「加载 mermaid + 渲染」管线全在 public/mermaid-loader.js（经典 script，
+// 经 config head 静态引入）——不放进本模块的原因见该文件头注释：主题 ESM 模块
+// 上下文里动态加载脚本的回调会被浏览器搁置，经典上下文一切正常。
+// 这里只保留调用入口。
 
 declare global {
   interface Window {
-    mermaid?: {
-      initialize: (config: Record<string, unknown>) => void
-      render: (id: string, text: string) => Promise<{ svg: string }>
-    }
+    /** mermaid-loader.js 暴露的渲染入口：转换并渲染页面上所有 mermaid 代码块 */
+    __mmRender?: (isDark: boolean, force?: boolean) => void
   }
 }
 
-let mermaidLoading: Promise<void> | null = null
-
-const loadMermaid = (base: string): Promise<void> => {
-  if (window.mermaid) return Promise.resolve()
-  if (!mermaidLoading) {
-    mermaidLoading = new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = `${base}mermaid.min.js`
-      script.onload = () => resolve()
-      script.onerror = () => {
-        mermaidLoading = null // 允许下次（如路由切换后）重试
-        reject(new Error(`加载 ${base}mermaid.min.js 失败`))
-      }
-      document.head.appendChild(script)
-    })
-  }
-  return mermaidLoading
-}
-
-// 转义源码，渲染失败时按纯文本展示用。
-const escapeHtml = (text: string) =>
-  text.replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[c] as string)
-
-const renderMermaid = async (base: string, isDark: boolean) => {
-  const codeBlocks = document.querySelectorAll<HTMLElement>('code.language-mermaid')
-  const boxes = document.querySelectorAll<HTMLElement>('.mermaid-box')
-  if (!codeBlocks.length && !boxes.length) return
-
-  try {
-    await loadMermaid(base)
-  } catch (err) {
-    console.warn('[mermaid]', err)
-    return
-  }
-
-  const mermaid = window.mermaid!
-  mermaid.initialize({ startOnLoad: false, theme: isDark ? 'dark' : 'default' })
-
-  // 首次渲染：把 ```mermaid 代码块整个换成容器，源码存进 data 属性（供主题切换时重渲染）。
-  for (const code of Array.from(codeBlocks)) {
-    const box = document.createElement('div')
-    box.className = 'mermaid-box'
-    box.dataset.mermaidSrc = code.textContent ?? ''
-    ;(code.closest('div[class*="language-mermaid"]') ?? code).replaceWith(box)
-  }
-
-  // 容器统一渲染（含主题切换后已存在的 .mermaid-box）。
-  for (const box of Array.from(document.querySelectorAll<HTMLElement>('.mermaid-box'))) {
-    const src = box.dataset.mermaidSrc ?? ''
-    const id = `mmd-${Math.random().toString(36).slice(2, 10)}`
-    try {
-      const { svg } = await mermaid.render(id, src)
-      box.innerHTML = svg
-    } catch (err) {
-      console.warn('[mermaid] 渲染失败：', err)
-      box.innerHTML = `<pre class="mermaid-fallback">${escapeHtml(src)}</pre>`
-    }
-  }
-}
+// ---------- 全屏阅读模式 ----------
+// 按钮与状态在 Layout.vue（顶栏插槽 + 右下角浮动按钮）和 fullscreen.ts 里，
+// 这里不参与。
 
 export default {
   extends: DefaultTheme,
+  // 包一层默认主题 Layout：往顶栏插槽塞全屏按钮（见 Layout.vue）。
+  // 注：Theme.setup() 由 VitePress 在 app 层调用，覆盖 Layout 不影响下面的 setup。
+  Layout,
   // 全局注册 <Video> 组件，markdown 里可直接写 <Video src="/xxx.mp4" />。
   enhanceApp({ app }) {
     app.component('Video', Video)
   },
   setup() {
     const route = useRoute()
-    const { site, isDark } = useData()
-    const refresh = () => nextTick(() => {
-      initZoom()
-      renderMermaid(site.value.base, isDark.value)
+    const { isDark } = useData()
+
+    const refresh = (forceMermaid = false) =>
+      nextTick(() => {
+        initZoom()
+        window.__mmRender?.(isDark.value, forceMermaid)
+      })
+
+    // VitePress 的正文是异步挂载的（初次水合 / 代码组切换 tab 都会晚于 Layout 的
+    // onMounted 出现），只靠 onMounted + 路由 watch 会错过内容出现的时机 ——
+    // 用 MutationObserver 兜底：只要页面上冒出未转换的 mermaid 代码块就补渲染。
+    let observerTimer: ReturnType<typeof setTimeout> | undefined
+
+    onMounted(() => {
+      refresh()
+      new MutationObserver(() => {
+        if (!document.querySelector('div.language-mermaid')) return
+        clearTimeout(observerTimer)
+        observerTimer = setTimeout(() => window.__mmRender?.(isDark.value), 100)
+      }).observe(document.body, { childList: true, subtree: true })
     })
 
-    onMounted(refresh)
     // 切到新页面后，DOM 重建，需要重新绑定新页面的图片、渲染新页面的图表。
-    watch(() => route.path, refresh)
-    // 深浅色切换后用对应主题重渲染图表。
-    watch(isDark, refresh)
+    watch(() => route.path, () => refresh())
+    // 深浅色切换后用对应主题强制重渲染图表。
+    watch(isDark, () => refresh(true))
   },
 } satisfies Theme

@@ -2,14 +2,21 @@ import { defineConfig } from 'vitepress'
 
 // base 从环境变量读取（GitHub Actions 里按仓库名自动算出 <user>.github.io → '/', 其他 → '/<repo>/'）。
 // 本地 `npm run docs:dev` 时为 undefined，回退到 '/'。
+const base = process.env.BASE_PATH || '/'
+
 export default defineConfig({
-  base: process.env.BASE_PATH || '/',
+  base,
   lang: 'zh-CN',
   title: 'UE5 学习/演示工程文档',
   description:
     'Unreal Engine 5.8 纯蓝图工程 —— 角色移动、动画、跳跃、场景机关、死亡重生与胜利流程的实操笔记',
   lastUpdated: true,
   // 不启用 cleanUrls：GitHub Pages 对无后缀 URL 支持不稳，带 .html 最保险。
+
+  // Mermaid 浏览器端渲染器（经典 script，public/ 下的静态文件，随站点根部署）。
+  // 必须走 head 静态引入而不是主题模块动态注入：见 mermaid-loader.js 文件头注释。
+  // 注：VitePress 不会给 head 里的 src 自动加 base 前缀，需手动拼。
+  head: [['script', { src: `${base}mermaid-loader.js`, defer: true }]],
 
   themeConfig: {
     siteTitle: 'UE5 文档',
@@ -83,6 +90,7 @@ export default defineConfig({
           { text: '10. 查阅：Actor 与组件生命周期', link: '/C++/10.查阅-Actor与组件生命周期全表' },
           { text: '11. 查阅：引擎启动与框架类生命周期', link: '/C++/11.查阅-引擎启动与框架类生命周期' },
           { text: '12. TArray 动态数组', link: '/C++/12.TArray动态数组' },
+          { text: '13. LineTrace 射线检测', link: '/C++/13.LineTrace射线检测' },
         ],
       },
       {
