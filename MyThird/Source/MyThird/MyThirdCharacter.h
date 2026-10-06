@@ -55,6 +55,10 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	
+	// TArray学习
+	UPROPERTY(EditAnywhere)
+	TArray<int32> MyIntArray;
 			
 
 protected:

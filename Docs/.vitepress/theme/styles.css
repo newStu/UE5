@@ -15,3 +15,26 @@
 .medium-zoom-image--opened {
   z-index: 10000;
 }
+
+/* Mermaid 图表（浏览器端渲染出的 SVG）相关样式 */
+
+/* 居中展示，超宽图表横向滚动而不是撑破正文。 */
+.mermaid-box {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+.mermaid-box svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 渲染失败时的源码回退块，标注出这是图表源码。 */
+.mermaid-fallback {
+  padding: 12px 16px;
+  border: 1px dashed var(--vp-c-danger-1);
+  border-radius: 8px;
+  overflow-x: auto;
+}

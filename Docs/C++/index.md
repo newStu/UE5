@@ -13,6 +13,11 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [5. 输入控制与第三人称相机](/C++/5.输入控制与第三人称相机.md) | 手写 PlayerCharacter：SpringArm/相机组件、三步旋转配置、Move 两种写法、Look → 相机链路 | 3. 第三人称角色移动 |
 | [6. 动画类的 C++ 实现与蓝图状态机绑定](/C++/6.动画类的C++实现与蓝图状态机绑定.md) | 手写 UPlayerAnim：缓存角色/移动组件、每帧算 Speed、蓝图状态机与混合空间消费 C++ 变量 | 2. 动画创建 |
 | [7. 拓展：为跳跃状态机暴露变量](/C++/7.拓展-为跳跃状态机暴露C++变量.md) | IsFalling / VerticalVelocity 的暴露思路与跳跃转换条件（拓展前瞻，工程尚未绑定跳跃） | 4. 角色跳跃 |
+| [8. 面向对象与 Actor/Pawn/Character](/C++/8.面向对象与Actor-Pawn-Character.md) | 封装/继承/多态/组合、Super 与虚函数、Actor → Pawn → Character 继承链与选型 | —（C++ 基础设施） |
+| [9. 运行顺序与生命周期（常用篇）](/C++/9.运行顺序与生命周期-常用篇.md) | 启动到退出的总览流程图、SpawnActor 完整链、常用生命周期函数（ctor / PostInitializeComponents / BeginPlay / Tick / EndPlay / Destroyed）与坑 | 3. 组件编写与生命周期 |
+| [10. 查阅：Actor 与组件生命周期全表](/C++/10.查阅-Actor与组件生命周期全表.md) | Actor 生成/初始化/运行/销毁四阶段全表、UActorComponent 全表、Actor 与组件相对顺序对照（查阅手册） | 3. 组件编写与生命周期 |
+| [11. 查阅：引擎启动与框架类生命周期](/C++/11.查阅-引擎启动与框架类生命周期.md) | 引擎→世界启动时序、玩家加入时序图、GameMode / GameState / Controller / Pawn / GameInstance / 子系统生命周期表（查阅手册） | 1. Character 与 GameMode |
+| [12. TArray 动态数组](/C++/12.TArray动态数组.md) | 创建/添加/移除/遍历/查找/排序、Num/Max/Slack 内存模型、RemoveAtSwap 技巧、GC 与 UPROPERTY、常见坑 | —（C++ 基础设施） |
 
 ## 学习建议
 

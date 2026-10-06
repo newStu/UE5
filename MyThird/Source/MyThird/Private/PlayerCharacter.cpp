@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -28,6 +29,12 @@ APlayerCharacter::APlayerCharacter()
 	PlayerCamera  -> SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	// 将相机附着到指定的位置
 	// PlayerCamera -> SetupAttachment(GetMesh(), FName("RootSocket"));
+	
+	
+	// 组合，将SphereComponent设置内容后，后续可以直接使用这个进行操作
+	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision"));
+	SphereComponent -> SetSphereRadius(400.0f);
+	
 
 	// 1.不要让角色随着控制器旋转
 	// 身体不直接跟随控制器旋转，由移动组件朝移动方向转身
@@ -43,11 +50,16 @@ APlayerCharacter::APlayerCharacter()
 	// 3.角色要跟据其运动方向进行旋转
 	GetCharacterMovement() -> bOrientRotationToMovement = true;
 	GetCharacterMovement() -> RotationRate = FRotator(0.f, 400.f, 0.f);
+	
+	
+	
+	UE_LOG(LogTemp, Warning, TEXT("APlayerCharacter::SetupAttachment()"));
 }
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
+	UE_LOG(LogTemp, Warning, TEXT("APlayerCharacter::BeginPlay()"));
 	Super::BeginPlay();
 	
 	MyBlueprintEvent();
@@ -85,7 +97,6 @@ bool APlayerCharacter::GetTestBoolBlueprint()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -98,6 +109,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Attack);
 	}
 }
 
@@ -135,3 +147,9 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+
+void APlayerCharacter::Attack()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red,
+			FString::Printf(TEXT("Attack from Character"))); 
+}

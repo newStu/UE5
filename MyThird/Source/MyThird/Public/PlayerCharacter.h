@@ -7,6 +7,7 @@
 #include "InputActionValue.h"
 #include "InputMappingContext.h"
 #include "InputAction.h"
+#include "Components/SphereComponent.h"
 #include "PlayerCharacter.generated.h"
 
 class USpringArmComponent;
@@ -20,6 +21,10 @@ class MYTHIRD_API APlayerCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	APlayerCharacter();
+	
+	UFUNCTION(BlueprintCallable, Category = "Action")
+	virtual void Attack();
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,6 +48,10 @@ protected:
 
 	void Look(const FInputActionValue& Value);
 	void Move(const FInputActionValue& Value);
+	
+	// 演示组合
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sphere", meta=(AllowedPrivateAccess = "true"))
+	TObjectPtr<USphereComponent> SphereComponent;
 
 private: 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -63,6 +72,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category= "Input")
 	TObjectPtr<UInputAction> LookAction;
 	
+	UPROPERTY(EditDefaultsOnly, Category= "Input")
+	TObjectPtr<UInputAction> AttackAction;
 
 public:	
 	// Called every frame

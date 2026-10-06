@@ -78,6 +78,11 @@ export default defineConfig({
           { text: '5. 输入控制与第三人称相机', link: '/C++/5.输入控制与第三人称相机' },
           { text: '6. 动画类与蓝图状态机绑定', link: '/C++/6.动画类的C++实现与蓝图状态机绑定' },
           { text: '7. 拓展：为跳跃状态机暴露变量', link: '/C++/7.拓展-为跳跃状态机暴露C++变量' },
+          { text: '8. 面向对象与 Actor/Pawn/Character', link: '/C++/8.面向对象与Actor-Pawn-Character' },
+          { text: '9. 运行顺序与生命周期（常用篇）', link: '/C++/9.运行顺序与生命周期-常用篇' },
+          { text: '10. 查阅：Actor 与组件生命周期', link: '/C++/10.查阅-Actor与组件生命周期全表' },
+          { text: '11. 查阅：引擎启动与框架类生命周期', link: '/C++/11.查阅-引擎启动与框架类生命周期' },
+          { text: '12. TArray 动态数组', link: '/C++/12.TArray动态数组' },
         ],
       },
       {
