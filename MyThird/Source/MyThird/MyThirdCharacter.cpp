@@ -57,8 +57,8 @@ AMyThirdCharacter::AMyThirdCharacter()
 	// 相机臂长度:相机在角色后方 1000 单位处(数值越大镜头拉得越远)
 	CameraBoom->bUsePawnControlRotation = false; // Rotate the arm based on the controller
 	// 相机臂不跟随控制器旋转(本项目采用固定俯视角,旋转由下面这行直接设定)
-	CameraBoom->SetRelativeRotation(FRotator(-80.0f, 0.0f, 0.0f));
-	// 相机臂俯角 -80°:接近正俯视的视角(负 Pitch = 向下看)
+	CameraBoom->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
+	// 相机臂俯角 -45°:斜向下的第三人称视角(负 Pitch = 向下看,数值越大越接近俯视)
 	CameraBoom->bInheritPitch = false;  // 不继承控制器的俯仰
 	CameraBoom->bInheritRoll = false;   // 不继承控制器的翻滚
 	CameraBoom->bInheritYaw = false;    // 不继承控制器的偏航(保证视角始终固定)

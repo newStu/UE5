@@ -91,6 +91,8 @@ export default defineConfig({
           { text: '11. 查阅：引擎启动与框架类生命周期', link: '/C++/11.查阅-引擎启动与框架类生命周期' },
           { text: '12. TArray 动态数组', link: '/C++/12.TArray动态数组' },
           { text: '13. LineTrace 射线检测', link: '/C++/13.LineTrace射线检测' },
+          { text: '14. 实战：把视线检测重构为组件', link: '/C++/14.实战-把视线检测重构为组件' },
+          { text: '15. 查阅：引擎常用组件一览', link: '/C++/15.查阅-引擎常用组件一览' },
         ],
       },
       {
