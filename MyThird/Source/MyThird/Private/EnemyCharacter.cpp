@@ -39,6 +39,25 @@ void AEnemyCharacter::BeginPlay()
 	LookComponents->SetTargetActor(TargetCharacter);
 }
 
+void AEnemyCharacter::Fire()
+{
+	if (BallProjectileClass == nullptr)
+	{
+		return;
+	}
+	
+	FVector ForwardVector = GetActorForwardVector();
+	float SpawnDistance = 40.f;
+	FVector SpawnLocation = GetActorLocation() + ForwardVector * SpawnDistance;
+	// GetWorld()->SpawnActor<ABallProjectile>(BallProjectileClass, SpawnLocation, GetActorRotation());
+	
+	FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+	ABallProjectile* Projectile = GetWorld() -> SpawnActorDeferred<ABallProjectile>(BallProjectileClass, SpawnTransform);
+	
+	Projectile->GetProjectileMovementComponent()->InitialSpeed = 2300;
+	Projectile->FinishSpawning(SpawnTransform);
+}
+
 // 每帧调用:检测视线,看得见玩家就打日志
 void AEnemyCharacter::Tick(float DeltaTime)
 {
@@ -52,12 +71,21 @@ void AEnemyCharacter::Tick(float DeltaTime)
 	// 旧写法(逻辑已移入组件,保留对照):
 	// bCanSeePlayer = LineTraceActor(TargetCharacter);
 	
-	if (bCanSeePlayer)
+	if (bCanSeePlayer != bPreviousCanSeePlayer)
 	{
+		if (bCanSeePlayer)
+		{
+			GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AEnemyCharacter::Fire, FireInterval,true, FireDelay);
+		}else
+		{
+			GetWorldTimerManager().ClearTimer(FireTimerHandle);
+		}
 		// 看得见玩家时输出警告日志(日志类别 LogTemp,可通过 *GetName() 打印目标名)
-		UE_LOG(LogTemp, Warning, TEXT("Can See Player %s"), *TargetCharacter->GetName());
-	}
+		// UE_LOG(LogTemp, Warning, TEXT("Can See Player %s"), *TargetCharacter->GetName()); 
+		// Fire();
+	}  
 	
+	bPreviousCanSeePlayer = bCanSeePlayer;
 }
 
 // 绑定输入:敌人暂时没有输入逻辑

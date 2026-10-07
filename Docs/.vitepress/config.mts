@@ -93,6 +93,7 @@ export default defineConfig({
           { text: '13. LineTrace 射线检测', link: '/C++/13.LineTrace射线检测' },
           { text: '14. 实战：把视线检测重构为组件', link: '/C++/14.实战-把视线检测重构为组件' },
           { text: '15. 查阅：引擎常用组件一览', link: '/C++/15.查阅-引擎常用组件一览' },
+          { text: '16. 实战：发射子弹与定时开火', link: '/C++/16.实战-发射子弹与定时开火' },
         ],
       },
       {

@@ -21,6 +21,7 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [13. LineTrace 射线检测](/C++/13.LineTrace射线检测.md) | 五要素、Trace 通道与自定义渠道、Sweep 对照、Single 与 Multi / Block 与 Overlap | —（C++ 基础设施） |
 | [14. 实战：把视线检测重构为组件](/C++/14.实战-把视线检测重构为组件.md) | 把 EnemyCharacter 的视线检测下放为 UMySceneComponent：基类选择、目标注入、Actor↔组件 API 换算、挂载三步 | 3. 组件编写与生命周期 |
 | [15. 查阅：引擎常用组件一览](/C++/15.查阅-引擎常用组件一览.md) | 形状/网格体/移动/相机/灯光/特效音频/工具/物理组件速查表、UPrimitiveComponent 碰撞与三事件、组件查找入口（查阅手册） | 3. 组件编写与生命周期 |
+| [16. 实战：发射子弹与定时开火](/C++/16.实战-发射子弹与定时开火.md) | BallProjectile 组装（球体碰撞+投射物移动）、TSubclassOf 类引用、SpawnActorDeferred 延迟生成、边沿触发 + FTimerHandle 定时开火 | —（视线检测实战续章） |
 
 ## 学习建议
 

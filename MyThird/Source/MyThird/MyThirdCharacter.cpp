@@ -55,13 +55,9 @@ AMyThirdCharacter::AMyThirdCharacter()
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 1000.0f; // The camera follows at this distance behind the character
 	// 相机臂长度:相机在角色后方 1000 单位处(数值越大镜头拉得越远)
-	CameraBoom->bUsePawnControlRotation = false; // Rotate the arm based on the controller
-	// 相机臂不跟随控制器旋转(本项目采用固定俯视角,旋转由下面这行直接设定)
-	CameraBoom->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
-	// 相机臂俯角 -45°:斜向下的第三人称视角(负 Pitch = 向下看,数值越大越接近俯视)
-	CameraBoom->bInheritPitch = false;  // 不继承控制器的俯仰
-	CameraBoom->bInheritRoll = false;   // 不继承控制器的翻滚
-	CameraBoom->bInheritYaw = false;    // 不继承控制器的偏航(保证视角始终固定)
+	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+	// 相机臂跟随控制器旋转:鼠标移动改变控制旋转,相机随之偏航(左右)/俯仰(上下)
+	// (bInheritPitch/Yaw/Roll 默认为 true,无需显式设置;视角初始角度由控制器 ControlRotation 决定)
 
 	// Create a follow camera
 	// 创建跟随相机

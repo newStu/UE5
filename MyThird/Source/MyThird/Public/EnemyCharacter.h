@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/MySceneComponent.h"
 #include "GameFramework/Character.h"
+#include "Projectile/BallProjectile.h"
 #include "EnemyCharacter.generated.h"
 
 
@@ -56,12 +57,23 @@ protected:
 	// 游戏开始或 Actor 被生成时调用一次,用于初始化
 	virtual void BeginPlay() override;
 
-private:
-	// 追踪的目标角色(默认为玩家角色,在 BeginPlay 中获取)
-	TObjectPtr<ACharacter> TargetCharacter;
-
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ABallProjectile> BallProjectileClass;
+	
 	// 本帧是否看得见玩家(每帧在 Tick 中更新)
 	bool bCanSeePlayer = false;
+	bool bPreviousCanSeePlayer = false;
+	
+	FTimerHandle FireTimerHandle;
+	
+	float FireInterval = 3.f;
+	float FireDelay = 0.5f;
+	
+	void Fire();
+
+private:
+	// 追踪的目标角色(默认为玩家角色,在 BeginPlay 中获取)
+	TObjectPtr<ACharacter> TargetCharacter; 
 
 	// CanSeeActor 是 const 成员函数,成员变量在其中是只读的,
 	// 加 mutable 才能传给 LineTraceMultiByChannel 的 TArray<FHitResult>& 出参
