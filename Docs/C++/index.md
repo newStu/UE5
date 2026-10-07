@@ -22,6 +22,7 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [14. 实战：把视线检测重构为组件](/C++/14.实战-把视线检测重构为组件.md) | 把 EnemyCharacter 的视线检测下放为 UMySceneComponent：基类选择、目标注入、Actor↔组件 API 换算、挂载三步 | 3. 组件编写与生命周期 |
 | [15. 查阅：引擎常用组件一览](/C++/15.查阅-引擎常用组件一览.md) | 形状/网格体/移动/相机/灯光/特效音频/工具/物理组件速查表、UPrimitiveComponent 碰撞与三事件、组件查找入口（查阅手册） | 3. 组件编写与生命周期 |
 | [16. 实战：发射子弹与定时开火](/C++/16.实战-发射子弹与定时开火.md) | BallProjectile 组装（球体碰撞+投射物移动）、TSubclassOf 类引用、SpawnActorDeferred 延迟生成、边沿触发 + FTimerHandle 定时开火 | —（视线检测实战续章） |
+| [17. 自定义碰撞通道与碰撞预设](/C++/17.自定义碰撞通道与碰撞预设.md) | 碰撞配置三层结构（通道/预设/组件）、新建 ObjectType 通道与自定义 Profile、SetCollisionProfileName、SetNotifyRigidBodyCollision 开启物理 Hit 事件 | —（第 13/16 章续章） |
 
 ## 学习建议
 

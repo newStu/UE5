@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "EnemyCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
@@ -9,10 +8,9 @@
 // 构造函数:设置默认值
 AEnemyCharacter::AEnemyCharacter()
 {
- 	// 允许该 Actor 每帧调用 Tick()
+	// 允许该 Actor 每帧调用 Tick()
 	// 如果不需要每帧更新逻辑,可以关掉以节省性能
 	PrimaryActorTick.bCanEverTick = true;
-
 
 	// 创建视线检测组件(只能在构造函数里用 CreateDefaultSubobject)
 	// 名字用 TEXT() 显式指定,编辑器组件树里显示"Look Components"
@@ -33,7 +31,6 @@ void AEnemyCharacter::BeginPlay()
 	// 此处写在 BeginPlay 而不是构造函数里,因为构造函数阶段世界尚未完全初始化
 	TargetCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
 
-
 	// 把目标注入给组件:组件只负责检测,"看谁"由 Actor 决定
 	// 写在 BeginPlay 是因为此时玩家角色才刚获取到(构造函数阶段拿不到)
 	LookComponents->SetTargetActor(TargetCharacter);
@@ -45,16 +42,16 @@ void AEnemyCharacter::Fire()
 	{
 		return;
 	}
-	
+
 	FVector ForwardVector = GetActorForwardVector();
 	float SpawnDistance = 40.f;
 	FVector SpawnLocation = GetActorLocation() + ForwardVector * SpawnDistance;
 	// GetWorld()->SpawnActor<ABallProjectile>(BallProjectileClass, SpawnLocation, GetActorRotation());
-	
+
 	FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
-	ABallProjectile* Projectile = GetWorld() -> SpawnActorDeferred<ABallProjectile>(BallProjectileClass, SpawnTransform);
-	
-	Projectile->GetProjectileMovementComponent()->InitialSpeed = 2300;
+	ABallProjectile *Projectile = GetWorld()->SpawnActorDeferred<ABallProjectile>(BallProjectileClass, SpawnTransform);
+
+	Projectile->GetProjectileMovementComponent()->InitialSpeed = 1000.f;
 	Projectile->FinishSpawning(SpawnTransform);
 }
 
@@ -63,36 +60,35 @@ void AEnemyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
 	// 每帧读取组件的检测结果(检测本身在组件的 TickComponent 里已完成,
 	// 这里只是读缓存标志,不会重复发射射线)
 	bCanSeePlayer = LookComponents->CanSeeTargetActor();
 
 	// 旧写法(逻辑已移入组件,保留对照):
 	// bCanSeePlayer = LineTraceActor(TargetCharacter);
-	
+
 	if (bCanSeePlayer != bPreviousCanSeePlayer)
 	{
 		if (bCanSeePlayer)
 		{
-			GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AEnemyCharacter::Fire, FireInterval,true, FireDelay);
-		}else
+			GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AEnemyCharacter::Fire, FireInterval, true, FireDelay);
+		}
+		else
 		{
 			GetWorldTimerManager().ClearTimer(FireTimerHandle);
 		}
 		// 看得见玩家时输出警告日志(日志类别 LogTemp,可通过 *GetName() 打印目标名)
-		// UE_LOG(LogTemp, Warning, TEXT("Can See Player %s"), *TargetCharacter->GetName()); 
+		// UE_LOG(LogTemp, Warning, TEXT("Can See Player %s"), *TargetCharacter->GetName());
 		// Fire();
-	}  
-	
+	}
+
 	bPreviousCanSeePlayer = bCanSeePlayer;
 }
 
 // 绑定输入:敌人暂时没有输入逻辑
-void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 // 视线检测入口:看得见目标就把自身转向目标
@@ -124,7 +120,6 @@ void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 // 	// 看不见:不做任何转向
 // 	return false;
 // }
-
 
 // 纯检测:判断从 Start 到 End 的射线是否畅通(畅通 = 看得见)
 // bool AEnemyCharacter::CanSeeActor(const AActor* TargetActor, FVector Start, FVector End) const
