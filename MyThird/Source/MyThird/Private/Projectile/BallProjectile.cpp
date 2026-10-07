@@ -2,6 +2,8 @@
 
 
 #include "Projectile/BallProjectile.h"
+// OnHit 里要 Cast 成玩家角色类,必须包含其头文件
+#include "MyThird/MyThirdCharacter.h"
 
 // Sets default values
 ABallProjectile::ABallProjectile()
@@ -33,7 +35,11 @@ ABallProjectile::ABallProjectile()
 void ABallProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	// 动态委托绑定:模拟物理撞到东西时回调 OnHit
+	// 前提:组件开启 SetNotifyRigidBodyCollision(true)(见构造函数)
+	SphereComponent->OnComponentHit.AddDynamic(this, &ABallProjectile::OnHit);
+	// 生命周期兜底:4 秒后自动 Destroy,防止没撞到玩家的子弹飞出场外堆积
 	SetLifeSpan(4.f);
 }
 
@@ -44,3 +50,16 @@ void ABallProjectile::Tick(float DeltaTime)
 
 }
 
+// 命中回调:撞到东西时触发(绑定见 BeginPlay)
+// 只关心"撞的是不是玩家":是 → 打日志 + 自我销毁;撞到墙/地面等则忽略,继续弹跳
+void ABallProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	// 把撞到的 Actor 尝试转换成玩家角色类:转换成功说明命中玩家
+	AMyThirdCharacter* Player = Cast<AMyThirdCharacter>(OtherActor);
+	if (Player)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit"));
+		// 命中玩家,子弹一次性消亡
+		Destroy();
+	}
+};

@@ -95,6 +95,7 @@ export default defineConfig({
           { text: '15. 查阅：引擎常用组件一览', link: '/C++/15.查阅-引擎常用组件一览' },
           { text: '16. 实战：发射子弹与定时开火', link: '/C++/16.实战-发射子弹与定时开火' },
           { text: '17. 自定义碰撞通道与碰撞预设', link: '/C++/17.自定义碰撞通道与碰撞预设' },
+          { text: '18. 实战：子弹命中回调 OnComponentHit', link: '/C++/18.实战-子弹命中回调OnComponentHit' },
         ],
       },
       {
