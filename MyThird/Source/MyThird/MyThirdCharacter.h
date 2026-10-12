@@ -12,7 +12,10 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UHealthComponent;
+
 struct FInputActionValue;
+
 
 // 声明本角色专用的日志类别(可在输出日志中按 LogTemplateCharacter 过滤)
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -65,6 +68,9 @@ public:
 
 protected:
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Health, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UHealthComponent> HealthComponent;
+	
 	/** Called for movement input */
 	// 移动输入回调:根据输入向量(WASD/摇杆)沿控制器 Yaw 朝向移动角色
 	void Move(const FInputActionValue& Value);

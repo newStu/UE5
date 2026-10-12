@@ -25,6 +25,7 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [17. 自定义碰撞通道与碰撞预设](/C++/17.自定义碰撞通道与碰撞预设.md) | 碰撞配置三层结构（通道/预设/组件）、新建 ObjectType 通道与自定义 Profile、SetCollisionProfileName、SetNotifyRigidBodyCollision 开启物理 Hit 事件 | —（第 13/16 章续章） |
 | [18. 实战：子弹命中回调 OnComponentHit](/C++/18.实战-子弹命中回调OnComponentHit.md) | OnComponentHit 委托绑定（AddDynamic + UFUNCTION）、回调参数逐个看、Cast 判断撞到的是玩家还是墙、Destroy 一次性销毁 | —（第 16/17 章续章） |
 | [19. 实战：接口 Interface 与命中解耦](/C++/19.实战-接口Interface与命中解耦.md) | UInterface 双类结构、BlueprintNativeEvent 与 _Implementation 三层分发、角色多继承实现接口、Implements + Execute 调用、替换 Cast 解耦命中判定 | 10.1 蓝图接口 |
+| [20. 实战：血量组件 HealthComponent](/C++/20.实战-血量组件HealthComponent.md) | UActorComponent 血量组件、LoseHealth 扣血与归零钳制、组件经接口通知拥有者（GetOwner + Implements + Execute）、CreateDefaultSubobject 挂载、QuitGame 死亡退出 | 6. 角色死亡设置 |
 
 ## 学习建议
 

@@ -97,6 +97,7 @@ export default defineConfig({
           { text: '17. 自定义碰撞通道与碰撞预设', link: '/C++/17.自定义碰撞通道与碰撞预设' },
           { text: '18. 实战：子弹命中回调 OnComponentHit', link: '/C++/18.实战-子弹命中回调OnComponentHit' },
           { text: '19. 实战：接口 Interface 与命中解耦', link: '/C++/19.实战-接口Interface与命中解耦' },
+          { text: '20. 实战：血量组件 HealthComponent', link: '/C++/20.实战-血量组件HealthComponent' },
         ],
       },
       {

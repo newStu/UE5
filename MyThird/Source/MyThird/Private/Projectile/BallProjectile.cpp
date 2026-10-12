@@ -5,6 +5,7 @@
 // OnHit 里要 Cast 成玩家角色类,必须包含其头文件
 #include "MyThird/MyThirdCharacter.h"
 // 命中判定用 UHealthInterface / IHealthInterface,直接包含接口头文件
+#include "Components/HealthComponent.h"
 #include "Interface/HealthInterface.h"
 
 // Sets default values
@@ -66,9 +67,22 @@ void ABallProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActo
 	// }
 	
 	
-	if (OtherActor -> Implements<UHealthInterface>())
+	// if (OtherActor -> Implements<UHealthInterface>())
+	// {
+	// 	IHealthInterface::Execute_Damage(OtherActor); // OtherActor -> Damage_Implementation()
+	// 	Destroy();
+	// }
+
+	AMyThirdCharacter* MyThirdCharacter = Cast<AMyThirdCharacter>(OtherActor);
+	if (MyThirdCharacter != nullptr)
 	{
-		IHealthInterface::Execute_Damage(OtherActor); // OtherActor -> Damage_Implementation()
+		UHealthComponent* HealthComponent = MyThirdCharacter->FindComponentByClass<UHealthComponent>();
+		if (HealthComponent != nullptr)
+		{
+			HealthComponent->LoseHealth(Damage);
+		}
+		
 		Destroy();
 	}
+	
 }

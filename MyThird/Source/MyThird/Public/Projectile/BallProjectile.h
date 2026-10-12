@@ -37,6 +37,10 @@ private:
 	// 生成时按 InitialSpeed × 生成朝向算出初速度交给刚体,随后每帧不再驱动
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ball", meta = (AllowPrivateAccess = true))
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovementComponent;
+	
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = true))
+	float Damage = 40.f;
 
 public:
 	// 只读访问器:供外部(如发射者)查询移动组件(初速度等属性)
