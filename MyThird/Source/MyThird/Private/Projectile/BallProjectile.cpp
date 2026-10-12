@@ -4,6 +4,8 @@
 #include "Projectile/BallProjectile.h"
 // OnHit 里要 Cast 成玩家角色类,必须包含其头文件
 #include "MyThird/MyThirdCharacter.h"
+// 命中判定用 UHealthInterface / IHealthInterface,直接包含接口头文件
+#include "Interface/HealthInterface.h"
 
 // Sets default values
 ABallProjectile::ABallProjectile()
@@ -55,11 +57,18 @@ void ABallProjectile::Tick(float DeltaTime)
 void ABallProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// 把撞到的 Actor 尝试转换成玩家角色类:转换成功说明命中玩家
-	AMyThirdCharacter* Player = Cast<AMyThirdCharacter>(OtherActor);
-	if (Player)
+	// AMyThirdCharacter* Player = Cast<AMyThirdCharacter>(OtherActor);
+	// if (Player)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("Hit"));
+	// 	// 命中玩家,子弹一次性消亡
+	// 	Destroy();
+	// }
+	
+	
+	if (OtherActor -> Implements<UHealthInterface>())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit"));
-		// 命中玩家,子弹一次性消亡
+		IHealthInterface::Execute_Damage(OtherActor); // OtherActor -> Damage_Implementation()
 		Destroy();
 	}
-};
+}

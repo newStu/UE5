@@ -24,6 +24,7 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [16. 实战：发射子弹与定时开火](/C++/16.实战-发射子弹与定时开火.md) | BallProjectile 组装（球体碰撞+投射物移动）、TSubclassOf 类引用、SpawnActorDeferred 延迟生成、边沿触发 + FTimerHandle 定时开火 | —（视线检测实战续章） |
 | [17. 自定义碰撞通道与碰撞预设](/C++/17.自定义碰撞通道与碰撞预设.md) | 碰撞配置三层结构（通道/预设/组件）、新建 ObjectType 通道与自定义 Profile、SetCollisionProfileName、SetNotifyRigidBodyCollision 开启物理 Hit 事件 | —（第 13/16 章续章） |
 | [18. 实战：子弹命中回调 OnComponentHit](/C++/18.实战-子弹命中回调OnComponentHit.md) | OnComponentHit 委托绑定（AddDynamic + UFUNCTION）、回调参数逐个看、Cast 判断撞到的是玩家还是墙、Destroy 一次性销毁 | —（第 16/17 章续章） |
+| [19. 实战：接口 Interface 与命中解耦](/C++/19.实战-接口Interface与命中解耦.md) | UInterface 双类结构、BlueprintNativeEvent 与 _Implementation 三层分发、角色多继承实现接口、Implements + Execute 调用、替换 Cast 解耦命中判定 | 10.1 蓝图接口 |
 
 ## 学习建议
 

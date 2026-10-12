@@ -125,5 +125,10 @@ Docs/.vitepress/dist/
 # JetBrains Rider/IDEA 个人配置（机器私有，不入库）
 .idea/
 
+# Rider 自动往各工程安装的 RiderLink 插件（数百 MB、机器自动生成，不入库）。
+# 只忽略 Plugins/Developer/，自己写的插件（Plugins/<你的插件>/）仍会被跟踪。
+# 注意：模式中间含斜杠会被 git 锚定到仓库根，必须加 **/ 前缀才能在任意工程目录下生效。
+**/Plugins/Developer/
+
 # 根目录误生成的 VitePress 缓存（在错误目录启动 dev server 时产生）
 /.vitepress/

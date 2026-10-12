@@ -75,6 +75,16 @@ AMyThirdCharacter::AMyThirdCharacter()
 
 }
 
+void AMyThirdCharacter::Death_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Death"))
+}
+
+void AMyThirdCharacter::Damage_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Damage"))
+}
+
 // 游戏开始:目前仅调用父类实现
 void AMyThirdCharacter::BeginPlay()
 {

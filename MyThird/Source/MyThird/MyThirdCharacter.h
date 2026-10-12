@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/HealthInterface.h"
 #include "Logging/LogMacros.h"
 #include "MyThirdCharacter.generated.h"
 
@@ -17,7 +18,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AMyThirdCharacter : public ACharacter
+class AMyThirdCharacter : public ACharacter, public IHealthInterface
 {
 	GENERATED_BODY()
 
@@ -56,6 +57,10 @@ class AMyThirdCharacter : public ACharacter
 public:
 	// 构造函数:初始化胶囊体尺寸、移动参数、相机臂与跟随相机
 	AMyThirdCharacter();
+	
+	void Death_Implementation() override;
+	
+	void Damage_Implementation() override;
 
 
 protected:
