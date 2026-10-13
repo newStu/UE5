@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Components/HealthComponent.h"
+#include "Game/ThirdPlayerController.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 // 定义日志类别(与头文件中的 DECLARE 对应)
@@ -82,13 +83,23 @@ AMyThirdCharacter::AMyThirdCharacter()
 
 void AMyThirdCharacter::Death_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Death"))
-	UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit, true);
+	UE_LOG(LogTemp, Warning, TEXT("Death"));
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	if (PlayerController != nullptr)
+	{
+		PlayerController->ShowRestartWidget();	
+	}
 }
 
 void AMyThirdCharacter::Damage_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Damage"))
+	UE_LOG(LogTemp, Warning, TEXT("Damage"));
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	
+	if (PlayerController != nullptr)
+	{
+		PlayerController->UpdateHealthPercent(HealthComponent->GetHealthPercent());
+	}
 }
 
 // 游戏开始:目前仅调用父类实现
@@ -96,6 +107,12 @@ void AMyThirdCharacter::BeginPlay()
 {
 	// Call the base class
 	Super::BeginPlay();
+	
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	if (PlayerController != nullptr)
+	{
+		PlayerController->UpdateHealthPercent(HealthComponent->GetHealthPercent());
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

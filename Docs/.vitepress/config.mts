@@ -98,6 +98,7 @@ export default defineConfig({
           { text: '18. 实战：子弹命中回调 OnComponentHit', link: '/C++/18.实战-子弹命中回调OnComponentHit' },
           { text: '19. 实战：接口 Interface 与命中解耦', link: '/C++/19.实战-接口Interface与命中解耦' },
           { text: '20. 实战：血量组件 HealthComponent', link: '/C++/20.实战-血量组件HealthComponent' },
+          { text: '21. 实战：UMG 血条与死亡重开界面', link: '/C++/21.实战-UMG血条与死亡重开界面' },
         ],
       },
       {

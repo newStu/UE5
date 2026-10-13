@@ -97,6 +97,8 @@ DerivedDataCache/
 !**/Content/Input/
 !**/Content/ThirdPerson/
 !**/Content/Variant_Combat/
+# MyThird 的自建蓝图/关卡目录（C++ 工程的全部自有资产，体积很小）
+!**/Content/_Game/
 
 # 白名单：小资产专用上传目录 —— 想随仓库提交的小体积资源，
 # 放进任意工程的 Content/Upload/ 即可被跟踪（所有工程通用）。

@@ -26,6 +26,7 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [18. 实战：子弹命中回调 OnComponentHit](/C++/18.实战-子弹命中回调OnComponentHit.md) | OnComponentHit 委托绑定（AddDynamic + UFUNCTION）、回调参数逐个看、Cast 判断撞到的是玩家还是墙、Destroy 一次性销毁 | —（第 16/17 章续章） |
 | [19. 实战：接口 Interface 与命中解耦](/C++/19.实战-接口Interface与命中解耦.md) | UInterface 双类结构、BlueprintNativeEvent 与 _Implementation 三层分发、角色多继承实现接口、Implements + Execute 调用、替换 Cast 解耦命中判定 | 10.1 蓝图接口 |
 | [20. 实战：血量组件 HealthComponent](/C++/20.实战-血量组件HealthComponent.md) | UActorComponent 血量组件、LoseHealth 扣血与归零钳制、组件经接口通知拥有者（GetOwner + Implements + Execute）、CreateDefaultSubobject 挂载、QuitGame 死亡退出 | 6. 角色死亡设置 |
+| [21. 实战：UMG 血条与死亡重开界面](/C++/21.实战-UMG血条与死亡重开界面.md) | Build.cs 补 UMG/Slate 模块、ThirdPlayerController 管 Widget（TSubclassOf + CreateWidget）、BindWidget 绑控件、按钮 AddDynamic、死亡菜单三件套（SetPause/InputMode/鼠标）、OpenLevel 重开 | 7. 死亡后重生 |
 
 ## 学习建议
 

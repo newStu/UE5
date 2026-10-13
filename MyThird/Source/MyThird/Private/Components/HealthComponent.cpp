@@ -37,6 +37,12 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UHealthComponent::LoseHealth(float Amount)
 {
+	// 已死亡则不再结算,防止 Death 重复触发(叠加 Widget)
+	if (Health <= 0)
+	{
+		return;
+	}
+
 	Health -= Amount;
 	if (GetOwner()->Implements<UHealthInterface>())
 	{
