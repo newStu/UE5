@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" role="img" aria-label="UE5 learning notes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#38bdf8" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <!-- 边缘放光：青蓝内圈 + 靛紫外圈两层投影 -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38bdf8" flood-opacity="0.5"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#6366f1" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- 卡片底（内缩 24px 给发光留空间） -->
+  <rect x="24" y="24" width="512" height="352" rx="24" fill="url(#bg)" stroke="#334155" stroke-width="1.5" filter="url(#glow)"/>
+  <rect x="24" y="24" width="512" height="352" rx="24" fill="url(#grid)"/>
+
+  <!-- 蓝图节点连线装饰（右上） -->
+  <g stroke="#38bdf8" stroke-opacity="0.55" stroke-width="1.5" fill="none">
+    <path d="M402 66 h54 l26 26"/>
+    <path d="M402 66 h80 v44"/>
+  </g>
+  <g fill="#0f172a" stroke="#38bdf8" stroke-width="1.5">
+    <circle cx="402" cy="66" r="5"/>
+    <circle cx="482" cy="92" r="5"/>
+    <circle cx="482" cy="110" r="5"/>
+  </g>
+  <circle cx="402" cy="66" r="9" fill="none" stroke="#38bdf8" stroke-opacity="0.3"/>
+
+  <!-- 代码括号装饰（左下） -->
+  <g font-family="ui-monospace, Consolas, monospace" font-size="44" fill="#38bdf8" fill-opacity="0.28" font-weight="700">
+    <text x="64" y="330">{ }</text>
+  </g>
+
+  <!-- 主标题 -->
+  <text x="280" y="185" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="128" font-weight="800" fill="#f8fafc" letter-spacing="2">UE5</text>
+
+  <!-- 副标题 -->
+  <text x="280" y="228" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="17" font-weight="600" fill="#94a3b8" letter-spacing="8">LEARNING NOTES</text>
+
+  <!-- 分隔线 -->
+  <rect x="170" y="252" width="220" height="3" rx="1.5" fill="url(#accent)"/>
+
+  <!-- 双线徽章 -->
+  <g font-family="'Segoe UI', system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="116" y="286" width="156" height="36" rx="18" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-opacity="0.6"/>
+    <text x="194" y="309" text-anchor="middle" fill="#7dd3fc">BLUEPRINT</text>
+
+    <rect x="288" y="286" width="156" height="36" rx="18" fill="#818cf8" fill-opacity="0.12" stroke="#818cf8" stroke-opacity="0.6"/>
+    <text x="366" y="309" text-anchor="middle" fill="#a5b4fc">C++</text>
+  </g>
+</svg>

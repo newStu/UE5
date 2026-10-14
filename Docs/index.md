@@ -2,19 +2,22 @@
 layout: home
 
 hero:
-  name: UE5 文档
-  text: 学习 / 演示工程笔记
-  tagline: Unreal Engine 5.8 纯蓝图工程 —— 从角色移动到场景机关、死亡重生与胜利流程的完整实操记录。
+  name: UE5 学习笔记
+  text: 蓝图入门 · C++ 进阶
+  image:
+    src: /hero.svg
+    alt: UE5 学习笔记
+  tagline: 跟随 B 站教程的双线实操记录 —— 蓝图篇从角色移动到场景机关与完整游戏流程，C++ 篇从组件、射线检测到接口、UMG 与音效。
   actions:
     - theme: brand
-      text: 开始阅读
+      text: 蓝图入门
       link: /蓝图/1.创建角色移动/创建角色移动
+    - theme: brand
+      text: C++ 进阶
+      link: /C++/
     - theme: alt
-      text: 源码仓库（GitHub）
+      text: GitHub 仓库
       link: https://github.com/newStu/UE5
-    - theme: alt
-      text: 入门视频教程
-      link: https://www.bilibili.com/video/BV1qYSvBHELW/?p=21
 
 features:
   - icon: 🏃
@@ -45,6 +48,18 @@ features:
     title: 10. 蓝图通讯
     details: 蓝图接口与事件分发器两种解耦方式——接口点名调用、分发器一对多广播。
     link: /蓝图/10.蓝图通讯/蓝图接口/蓝图接口
+  - icon: 🧩
+    title: C++ 组件与反射
+    details: 增强输入绑定、自定义组件与生命周期、常用宏（UPROPERTY/UFUNCTION）与反射系统。
+    link: /C++/3.组件编写与生命周期
+  - icon: 🎯
+    title: C++ 射线检测与碰撞
+    details: LineTrace 视线检测、自定义碰撞通道与预设、子弹命中回调 OnComponentHit。
+    link: /C++/13.LineTrace射线检测
+  - icon: 💉
+    title: C++ 战斗闭环
+    details: 接口解耦命中判定、血量组件、UMG 血条、HUD 管理、音效与命中特效。
+    link: /C++/19.实战-接口Interface与命中解耦
 ---
 
-> 📺 **编写说明**：本工程与文档跟随 B 站视频教程 [《【最新版 5.7】UE5 零基础入门教程》](https://www.bilibili.com/video/BV1qYSvBHELW) 学习整理而成，按章节逐步实操记录。感谢 UP 主的优质教程。
+> 📺 **编写说明**：蓝图部分跟随 B 站视频教程 [《【最新版 5.7】UE5 零基础入门教程》](https://www.bilibili.com/video/BV1qYSvBHELW) 学习整理而成；C++ 部分跟随 [UE5 C++ 实战教程](https://www.bilibili.com/video/BV1af421R7BD/) 学习整理而成。均按章节逐步实操记录，感谢 UP 主的优质教程。

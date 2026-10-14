@@ -48,6 +48,8 @@
  * ---------------------------------------------------------------- */
 :root {
   --vp-layout-max-width: 1720px;
+  /* 左侧目录加宽：默认 272px，中文长标题（如“18. 实战：子弹命中回调…”）会换行/截断。 */
+  --vp-sidebar-width: 320px;
 }
 
 .VPDoc .content-container {
@@ -60,6 +62,32 @@
 
 .VPDoc:not(.has-sidebar) .container {
   max-width: 1320px !important;
+}
+
+/* ---------------------------------------------------------------- *
+ * 右侧“本页目录”加宽：默认外层 .aside max-width 256px、内层
+ * .aside-container 224px，中文三级标题（配置了 outline level [2,3]）
+ * 经常截断省略。同步改 aside-curtain（顶栏下方的遮罩帘）保持对齐。
+ * 主题默认规则带 scoped 属性选择器（特异性更高），用 !important 覆盖。
+ * ---------------------------------------------------------------- */
+.VPDoc .aside {
+  max-width: 320px !important;
+}
+
+.VPDoc .aside-container,
+.VPDoc .aside-curtain {
+  width: 288px !important;
+}
+
+/* ---------------------------------------------------------------- *
+ * 首页 hero 配图加宽：默认容器 max-width 336px，稍放宽让卡片更舒展。
+ * ---------------------------------------------------------------- */
+.VPHero .image-container {
+  max-width: 400px;
+}
+
+.VPHero .image-container img {
+  width: 100%;
 }
 
 /* ---------------------------------------------------------------- *
