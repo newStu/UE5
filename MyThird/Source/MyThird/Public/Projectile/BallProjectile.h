@@ -21,6 +21,16 @@ public:
 	// Sets default values for this actor's properties
 	// 构造函数:创建组件,配置碰撞预设/模拟物理/初速度(实现见 .cpp)
 	ABallProjectile();
+	
+	UPROPERTY(EditAnywhere, Category=Damage)
+	TObjectPtr<USoundBase> HitBounceSound;
+	
+	UPROPERTY(EditAnywhere, Category=Damage)
+	TObjectPtr<USoundAttenuation> HitSoundAttenuation;
+	
+	UPROPERTY(EditAnywhere, Category=Damage)
+	TObjectPtr<UParticleSystem> HitParticle;
+	 
 
 protected:
 	// Called when the game starts or when spawned

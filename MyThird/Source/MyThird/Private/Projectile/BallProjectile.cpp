@@ -5,8 +5,8 @@
 // OnHit 里要 Cast 成玩家角色类,必须包含其头文件
 #include "MyThird/MyThirdCharacter.h"
 // 命中判定用 UHealthInterface / IHealthInterface,直接包含接口头文件
-#include "Components/HealthComponent.h"
-#include "Interface/HealthInterface.h"
+#include "Components/HealthComponent.h" 
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABallProjectile::ABallProjectile()
@@ -72,6 +72,12 @@ void ABallProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActo
 	// 	IHealthInterface::Execute_Damage(OtherActor); // OtherActor -> Damage_Implementation()
 	// 	Destroy();
 	// }
+	
+	
+	if (HitBounceSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, HitBounceSound, GetActorLocation(), 1, FMath::RandRange(0.4f, 1.f), 0.f, HitSoundAttenuation);
+	}
 
 	AMyThirdCharacter* MyThirdCharacter = Cast<AMyThirdCharacter>(OtherActor);
 	if (MyThirdCharacter != nullptr)
@@ -80,6 +86,11 @@ void ABallProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActo
 		if (HealthComponent != nullptr)
 		{
 			HealthComponent->LoseHealth(Damage);
+		}
+		
+		if (HitParticle != nullptr)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticle, GetActorTransform());
 		}
 		
 		Destroy();

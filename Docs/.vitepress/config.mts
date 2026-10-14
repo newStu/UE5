@@ -99,6 +99,8 @@ export default defineConfig({
           { text: '19. 实战：接口 Interface 与命中解耦', link: '/C++/19.实战-接口Interface与命中解耦' },
           { text: '20. 实战：血量组件 HealthComponent', link: '/C++/20.实战-血量组件HealthComponent' },
           { text: '21. 实战：UMG 血条与死亡重开界面', link: '/C++/21.实战-UMG血条与死亡重开界面' },
+          { text: '22. 实战：HUD 类与血条管理重构', link: '/C++/22.实战-HUD类与血条管理重构' },
+          { text: '23. 实战：音效与命中特效', link: '/C++/23.实战-音效与命中特效' },
         ],
       },
       {
