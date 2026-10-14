@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-// #include "HUD/RestartWidget.h"
 #include "ThirdPlayerController.generated.h"
 
 
 class UHealthWidget;
 class URestartWidget;
+class AThirdHUD;
 
 /**
  * 
@@ -45,4 +45,7 @@ private:
 	
 	UPROPERTY()
 	TObjectPtr<UHealthWidget> HealthWidget;	
+	
+	UPROPERTY()
+	TObjectPtr<AThirdHUD> ThirdHUD;
 };

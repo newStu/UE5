@@ -2,8 +2,8 @@
 
 
 #include "Game/ThirdPlayerController.h"
-#include "HUD/HealthWidget.h"
 #include "HUD/RestartWidget.h"
+#include "HUD/ThirdHUD.h"
 
 
 void AThirdPlayerController::ShowRestartWidget()
@@ -43,18 +43,29 @@ void AThirdPlayerController::HideRestartWidget()
 
 void AThirdPlayerController::UpdateHealthPercent(float HealthPercent)
 {
-	if (HealthWidget != nullptr)
+	// if (HealthWidget != nullptr)
+	// {
+	// 	HealthWidget->UpdateHealthPercent(HealthPercent);
+	// }
+	
+	if (ThirdHUD != nullptr)
 	{
-		HealthWidget->UpdateHealthPercent(HealthPercent);
+		ThirdHUD->UpdateHealthWidget(HealthPercent);
 	}
 }
 
 void AThirdPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (HealthWidgetClass !=nullptr)
+	// if (HealthWidgetClass !=nullptr)
+	// {
+	// 	HealthWidget = CreateWidget<UHealthWidget>(this, HealthWidgetClass);
+	// 	HealthWidget->AddToViewport();
+	// }
+	
+	ThirdHUD = Cast<AThirdHUD>(GetHUD());
+	if (ThirdHUD != nullptr)
 	{
-		HealthWidget = CreateWidget<UHealthWidget>(this, HealthWidgetClass);
-		HealthWidget->AddToViewport();
+		ThirdHUD->CreateHealthWidget();
 	}
 }
