@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/HealthInterface.h"
 #include "Logging/LogMacros.h"
 #include "MyThirdCharacter.generated.h"
 
@@ -11,13 +12,16 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UHealthComponent;
+
 struct FInputActionValue;
+
 
 // 声明本角色专用的日志类别(可在输出日志中按 LogTemplateCharacter 过滤)
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AMyThirdCharacter : public ACharacter
+class AMyThirdCharacter : public ACharacter, public IHealthInterface
 {
 	GENERATED_BODY()
 
@@ -56,10 +60,17 @@ class AMyThirdCharacter : public ACharacter
 public:
 	// 构造函数:初始化胶囊体尺寸、移动参数、相机臂与跟随相机
 	AMyThirdCharacter();
+	
+	void Death_Implementation() override;
+	
+	void Damage_Implementation() override;
 
 
 protected:
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Health, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UHealthComponent> HealthComponent;
+	
 	/** Called for movement input */
 	// 移动输入回调:根据输入向量(WASD/摇杆)沿控制器 Yaw 朝向移动角色
 	void Move(const FInputActionValue& Value);

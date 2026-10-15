@@ -10,6 +10,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Components/HealthComponent.h"
+#include "Game/ThirdPlayerController.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // 定义日志类别(与头文件中的 DECLARE 对应)
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -72,7 +75,31 @@ AMyThirdCharacter::AMyThirdCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content reference in C++)
 	// 提示:骨骼网格体与动画蓝图不在 C++ 里引用,
 	// 而是在派生蓝图 ThirdPersonCharacter(BP_ThirdPersonCharacter)中指定,避免 C++ 直接依赖资产
+	
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>("HP");
+	
 
+}
+
+void AMyThirdCharacter::Death_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Death"));
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	if (PlayerController != nullptr)
+	{
+		PlayerController->ShowRestartWidget();	
+	}
+}
+
+void AMyThirdCharacter::Damage_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Damage"));
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	
+	if (PlayerController != nullptr)
+	{
+		PlayerController->UpdateHealthPercent(HealthComponent->GetHealthPercent());
+	}
 }
 
 // 游戏开始:目前仅调用父类实现
@@ -80,6 +107,12 @@ void AMyThirdCharacter::BeginPlay()
 {
 	// Call the base class
 	Super::BeginPlay();
+	
+	AThirdPlayerController* PlayerController = Cast<AThirdPlayerController>(GetController());
+	if (PlayerController != nullptr)
+	{
+		PlayerController->UpdateHealthPercent(HealthComponent->GetHealthPercent());
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

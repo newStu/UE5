@@ -1,11 +1,15 @@
 # UE5 学习/演示工程仓库
 
-本仓库包含两个 **Unreal Engine 5.8** 工程（纯蓝图，无 C++ Source）：
+本仓库包含多个 **Unreal Engine** 学习工程（蓝图入门 + C++ 进阶双线，引擎 5.8 / 5.4）：
 
-| 工程 | 说明 |
-|---|---|
-| `ChallengeGame/` | 挑战游戏工程（含自定义关卡 `Level_Scene_01`、角色/输入/机关蓝图） |
-| `Demo 5.8/` | 演示工程（第三人称、输入、`Variant_Combat` 战斗 AI/连招蓝图） |
+| 工程 | 类型 | 说明 |
+|---|---|---|
+| `ChallengeGame/` | 蓝图 · 5.8 | 挑战游戏工程（含自定义关卡 `Level_Scene_01`、角色/输入/机关蓝图） |
+| `Demo 5.8/` | 蓝图 · 5.8 | 演示工程（第三人称、输入、`Variant_Combat` 战斗 AI/连招蓝图） |
+| `MyThird/` | **C++** · 5.4 | 第三人称 C++ 学习工程 —— 增强输入、动画、LineTrace、碰撞、接口、血量组件、UMG/HUD、音效与特效，配套文档 C++ 篇第 1–23 章 |
+| `NiagarasDemo/` | C++ · 5.8 | Niagara 粒子特效练习工程 |
+| `MaterialDemo/` | 蓝图 · 5.8 | 材质编辑练习工程 |
+| `WarRPG/` | 蓝图 · 5.8 | RPG 相关练习工程 |
 
 共用插件：`ModelingToolsEditorMode`；`Demo 5.8` 另启用 `GameplayStateTree`。
 

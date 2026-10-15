@@ -97,6 +97,29 @@ DerivedDataCache/
 !**/Content/Input/
 !**/Content/ThirdPerson/
 !**/Content/Variant_Combat/
+# MyThird 的自建蓝图/关卡目录（C++ 工程的全部自有资产，体积很小）
+!**/Content/_Game/
+# World Partition 外部 Actor（摆放在关卡里的对象，小体积文本型资产）——
+# 不跟踪的话任何被跟踪的 .umap 拉下来都是空关卡
+!**/Content/__ExternalActors__/
+!**/Content/__ExternalObjects__/
+# 模板关卡搭建用白盒网格（272K，ThirdPersonMap 直接依赖）
+!**/Content/LevelPrototyping/
+
+# StarterContent 只挑被引用的资产入库：BP_BallProjectile 的子弹材质 M_Door
+# 及其两张贴图（合计约 1.8MB）。git 无法重新包含父目录被忽略的文件，
+# 所以必须沿目录链逐级"取消忽略→重新忽略→挑文件"：
+!**/Content/StarterContent/
+**/Content/StarterContent/*
+!**/Content/StarterContent/Props/
+**/Content/StarterContent/Props/*
+!**/Content/StarterContent/Props/Materials/
+**/Content/StarterContent/Props/Materials/*
+!**/Content/StarterContent/Props/Materials/M_Door.uasset
+!**/Content/StarterContent/Textures/
+**/Content/StarterContent/Textures/*
+!**/Content/StarterContent/Textures/T_Door_M.uasset
+!**/Content/StarterContent/Textures/T_Door_N.uasset
 
 # 白名单：小资产专用上传目录 —— 想随仓库提交的小体积资源，
 # 放进任意工程的 Content/Upload/ 即可被跟踪（所有工程通用）。
@@ -124,6 +147,11 @@ Docs/.vitepress/dist/
 
 # JetBrains Rider/IDEA 个人配置（机器私有，不入库）
 .idea/
+
+# Rider 自动往各工程安装的 RiderLink 插件（数百 MB、机器自动生成，不入库）。
+# 只忽略 Plugins/Developer/，自己写的插件（Plugins/<你的插件>/）仍会被跟踪。
+# 注意：模式中间含斜杠会被 git 锚定到仓库根，必须加 **/ 前缀才能在任意工程目录下生效。
+**/Plugins/Developer/
 
 # 根目录误生成的 VitePress 缓存（在错误目录启动 dev server 时产生）
 /.vitepress/

@@ -1,6 +1,6 @@
 # C++ 笔记
 
-UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝图章节做过的东西（角色移动、输入绑定、组件、死亡重生）逐个用 C++ 重新实现一遍，并补充蓝图视角看不到的底层机制。
+UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理（暂用 UE 5.4，后续计划对齐蓝图篇的 5.8）——把前面蓝图章节做过的东西（角色移动、输入绑定、组件、死亡重生）逐个用 C++ 重新实现一遍，并补充蓝图视角看不到的底层机制。
 
 ## 目录
 
@@ -24,6 +24,11 @@ UE5 C++ 开发相关笔记，配合 `MyThird` C++ 工程整理——把前面蓝
 | [16. 实战：发射子弹与定时开火](/C++/16.实战-发射子弹与定时开火.md) | BallProjectile 组装（球体碰撞+投射物移动）、TSubclassOf 类引用、SpawnActorDeferred 延迟生成、边沿触发 + FTimerHandle 定时开火 | —（视线检测实战续章） |
 | [17. 自定义碰撞通道与碰撞预设](/C++/17.自定义碰撞通道与碰撞预设.md) | 碰撞配置三层结构（通道/预设/组件）、新建 ObjectType 通道与自定义 Profile、SetCollisionProfileName、SetNotifyRigidBodyCollision 开启物理 Hit 事件 | —（第 13/16 章续章） |
 | [18. 实战：子弹命中回调 OnComponentHit](/C++/18.实战-子弹命中回调OnComponentHit.md) | OnComponentHit 委托绑定（AddDynamic + UFUNCTION）、回调参数逐个看、Cast 判断撞到的是玩家还是墙、Destroy 一次性销毁 | —（第 16/17 章续章） |
+| [19. 实战：接口 Interface 与命中解耦](/C++/19.实战-接口Interface与命中解耦.md) | UInterface 双类结构、BlueprintNativeEvent 与 _Implementation 三层分发、角色多继承实现接口、Implements + Execute 调用、替换 Cast 解耦命中判定 | 10.1 蓝图接口 |
+| [20. 实战：血量组件 HealthComponent](/C++/20.实战-血量组件HealthComponent.md) | UActorComponent 血量组件、LoseHealth 扣血与归零钳制、组件经接口通知拥有者（GetOwner + Implements + Execute）、CreateDefaultSubobject 挂载、QuitGame 死亡退出 | 6. 角色死亡设置 |
+| [21. 实战：UMG 血条与死亡重开界面](/C++/21.实战-UMG血条与死亡重开界面.md) | Build.cs 补 UMG/Slate 模块、ThirdPlayerController 管 Widget（TSubclassOf + CreateWidget）、BindWidget 绑控件、按钮 AddDynamic、死亡菜单三件套（SetPause/InputMode/鼠标）、OpenLevel 重开 | 7. 死亡后重生 |
+| [22. 实战：HUD 类与血条管理重构](/C++/22.实战-HUD类与血条管理重构.md) | 自定义 AThirdHUD 接管血条 Widget、PlayerController 退位为转发、职责迁移重构思路 | —（第 21 章续章） |
+| [23. 实战：音效与命中特效](/C++/23.实战-音效与命中特效.md) | PlaySoundAtLocation 碰撞音效（随机音调 + SoundAttenuation 距离衰减）、SpawnEmitterAtLocation 命中粒子特效 | —（第 18 章续章） |
 
 ## 学习建议
 
