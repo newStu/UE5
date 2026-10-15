@@ -5,8 +5,8 @@ import { defineConfig } from 'vitepress'
 const base = process.env.BASE_PATH || '/'
 
 // ---------------- 侧边栏数据 ----------------
-// 按路径前缀分流：/C++/ 页面只显示 C++ 目录，/蓝图/ 页面只显示蓝图目录，
-// /编辑器/ 页面只显示编辑器目录；其余页面（如首页）兜底显示全部三大分类。
+// 按路径前缀分流：/C++/ 页面只显示 C++ 目录，/RPG/ 页面只显示 RPG 目录，
+// /蓝图/ 页面只显示蓝图目录，/编辑器/ 页面只显示编辑器目录；其余页面（如首页）兜底显示全部分类。
 
 const cppSidebar = {
   text: 'C++',
@@ -36,6 +36,15 @@ const cppSidebar = {
     { text: '21. 实战：UMG 血条与死亡重开界面', link: '/C++/21.实战-UMG血条与死亡重开界面' },
     { text: '22. 实战：HUD 类与血条管理重构', link: '/C++/22.实战-HUD类与血条管理重构' },
     { text: '23. 实战：音效与命中特效', link: '/C++/23.实战-音效与命中特效' },
+  ],
+}
+
+// 独立的顶级栏目：RPG 游戏开发（Warrior 工程），与 C++ 主线并列，编号从 1 重新起。
+const warriorSidebar = {
+  text: 'RPG',
+  collapsed: false,
+  items: [
+    { text: '1. RPG 项目骨架与 Base/Hero 类分层', link: '/RPG/1.项目骨架与Base-Hero类分层' },
   ],
 }
 
@@ -130,6 +139,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: 'C++', link: '/C++/' },
+      { text: 'RPG', link: '/RPG/1.项目骨架与Base-Hero类分层' },
       { text: '蓝图', link: '/蓝图/1.创建角色移动/创建角色移动' },
       {
         text: '编辑器',
@@ -141,13 +151,15 @@ export default defineConfig({
       },
     ],
 
-    // 侧边栏：按路径前缀分流 —— /C++/ 只显示 C++ 目录，/蓝图/ 只显示蓝图目录，
-    // /编辑器/ 只显示编辑器目录，其余页面（首页）兜底显示全部三大分类。
+    // 侧边栏：按路径前缀分流 —— /C++/ 只显示 C++ 目录，/RPG/ 只显示
+    // RPG 目录，/蓝图/ 只显示蓝图目录，/编辑器/ 只显示编辑器目录，
+    // 其余页面（首页）兜底显示全部分类。
     sidebar: {
       '/C++/': [cppSidebar],
+      '/RPG/': [warriorSidebar],
       '/蓝图/': [bpSidebar],
       '/编辑器/': [editorSidebar],
-      '/': [cppSidebar, bpSidebar, editorSidebar],
+      '/': [cppSidebar, warriorSidebar, bpSidebar, editorSidebar],
     },
 
     // 右上角仓库入口（指向 GitHub 主仓库，用 GitHub 图标）。
