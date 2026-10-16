@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Character/WarriorBaseCharacter.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "WarriorHeroCharacter.generated.h"
+
+
+class SpringArmComponent;
+class UCameraComponent;
+
+
 
 /**
  *
@@ -16,4 +23,18 @@ class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 
 public:
 	virtual void BeginPlay() override;
+	
+	AWarriorHeroCharacter();
+	
+	
+private:
+#pragma region Components
+
+	UPROPERTY(VisibleAnywhere, blueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent * CameraBoom;
+	
+	UPROPERTY(VisibleAnywhere, blueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UCameraComponent * FollowCamera;
+	
+#pragma endregion
 };
