@@ -47,6 +47,7 @@ const warriorSidebar = {
     { text: '1. RPG 项目骨架与 Base/Hero 类分层', link: '/RPG/1.项目骨架与Base-Hero类分层' },
     { text: '2. 调试打印与 Debug 助手', link: '/RPG/2.调试打印与Debug助手' },
     { text: '3. 相机臂与移动朝向配置', link: '/RPG/3.相机臂与移动朝向配置' },
+    { text: '4. Native Gameplay Tags', link: '/RPG/4.NativeGameplayTags' },
   ],
 }
 
