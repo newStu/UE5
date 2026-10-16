@@ -45,6 +45,7 @@ const warriorSidebar = {
   collapsed: false,
   items: [
     { text: '1. RPG 项目骨架与 Base/Hero 类分层', link: '/RPG/1.项目骨架与Base-Hero类分层' },
+    { text: '2. 调试打印与 Debug 助手', link: '/RPG/2.调试打印与Debug助手' },
   ],
 }
 
