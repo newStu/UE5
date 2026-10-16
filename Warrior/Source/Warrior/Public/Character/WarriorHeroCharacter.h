@@ -7,11 +7,13 @@
 #include "WarriorHeroCharacter.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void BeginPlay() override;
 };
