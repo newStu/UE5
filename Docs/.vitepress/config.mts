@@ -49,6 +49,7 @@ const warriorSidebar = {
     { text: '3. 相机臂与移动朝向配置', link: '/RPG/3.相机臂与移动朝向配置' },
     { text: '4. Native Gameplay Tags', link: '/RPG/4.NativeGameplayTags' },
     { text: '5. 输入绑定与 InputConfig 数据资产', link: '/RPG/5.输入绑定与InputConfig数据资产' },
+    { text: '6. 自定义 WarriorInputComponent', link: '/RPG/6.自定义WarriorInputComponent' },
   ],
 }
 
