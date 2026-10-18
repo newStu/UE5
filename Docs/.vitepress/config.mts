@@ -50,6 +50,7 @@ const warriorSidebar = {
     { text: '4. Native Gameplay Tags', link: '/RPG/4.NativeGameplayTags' },
     { text: '5. 输入绑定与 InputConfig 数据资产', link: '/RPG/5.输入绑定与InputConfig数据资产' },
     { text: '6. 自定义 WarriorInputComponent', link: '/RPG/6.自定义WarriorInputComponent' },
+    { text: '7. 动画绑定与 AnimInstance 分层', link: '/RPG/7.动画绑定与AnimInstance分层' },
   ],
 }
 
