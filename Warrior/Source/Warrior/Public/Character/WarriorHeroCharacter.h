@@ -8,6 +8,8 @@
 #include "WarriorHeroCharacter.generated.h"
 
 
+struct FInputActionValue;
+class UDataAsset_InputConfig;
 class SpringArmComponent;
 class UCameraComponent;
 
@@ -27,14 +29,27 @@ public:
 	AWarriorHeroCharacter();
 	
 	
+protected:
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+
 private:
 #pragma region Components
 
-	UPROPERTY(VisibleAnywhere, blueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent * CameraBoom;
 	
-	UPROPERTY(VisibleAnywhere, blueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent * FollowCamera;
 	
 #pragma endregion
+	
+#pragma region Input
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
+	UDataAsset_InputConfig* InputConfigDataAsset;
+	
+	void Input_Move(const FInputActionValue& InputActionValue);
+	
+	void Input_Look(const FInputActionValue& InputActionValue);
+#pragma endregion 
 };
