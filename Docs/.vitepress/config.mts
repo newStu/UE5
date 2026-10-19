@@ -51,6 +51,7 @@ const warriorSidebar = {
     { text: '5. 输入绑定与 InputConfig 数据资产', link: '/RPG/5.输入绑定与InputConfig数据资产' },
     { text: '6. 自定义 WarriorInputComponent', link: '/RPG/6.自定义WarriorInputComponent' },
     { text: '7. 动画绑定与 AnimInstance 分层', link: '/RPG/7.动画绑定与AnimInstance分层' },
+    { text: '8. 混合空间与移动状态机', link: '/RPG/8.混合空间与移动状态机' },
   ],
 }
 
