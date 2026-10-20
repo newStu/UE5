@@ -6,6 +6,8 @@
 #include "AnimInstance/WarriorCharacterAnimInstance.h"
 #include "WarriorHeroAnimInstance.generated.h"
 
+
+class AWarriorHeroCharacter;
 /**
  * 
  */
