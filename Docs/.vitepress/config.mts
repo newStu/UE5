@@ -54,6 +54,7 @@ const warriorSidebar = {
     { text: '8. 混合空间与移动状态机', link: '/RPG/8.混合空间与移动状态机' },
     { text: '9. Relax待机状态与Random Sequence Player', link: '/RPG/9.Relax待机状态与RandomSequencePlayer' },
     { text: '10. GAS初接入：AbilitySystemComponent与AttributeSet', link: '/RPG/10.GAS初接入ASC与AttributeSet' },
+    { text: '11. GameplayAbility基类与激活策略', link: '/RPG/11.GameplayAbility基类与激活策略' },
   ],
 }
 
