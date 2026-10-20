@@ -55,6 +55,7 @@ const warriorSidebar = {
     { text: '9. Relax待机状态与Random Sequence Player', link: '/RPG/9.Relax待机状态与RandomSequencePlayer' },
     { text: '10. GAS初接入：AbilitySystemComponent与AttributeSet', link: '/RPG/10.GAS初接入ASC与AttributeSet' },
     { text: '11. GameplayAbility基类与激活策略', link: '/RPG/11.GameplayAbility基类与激活策略' },
+    { text: '12. 武器Actor基类与生成流程', link: '/RPG/12.武器Actor基类与生成流程' },
   ],
 }
 
