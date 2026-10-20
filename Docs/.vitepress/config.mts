@@ -53,6 +53,7 @@ const warriorSidebar = {
     { text: '7. 动画绑定与 AnimInstance 分层', link: '/RPG/7.动画绑定与AnimInstance分层' },
     { text: '8. 混合空间与移动状态机', link: '/RPG/8.混合空间与移动状态机' },
     { text: '9. Relax待机状态与Random Sequence Player', link: '/RPG/9.Relax待机状态与RandomSequencePlayer' },
+    { text: '10. GAS初接入：AbilitySystemComponent与AttributeSet', link: '/RPG/10.GAS初接入ASC与AttributeSet' },
   ],
 }
 
