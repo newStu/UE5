@@ -56,6 +56,7 @@ const warriorSidebar = {
     { text: '10. GAS初接入：AbilitySystemComponent与AttributeSet', link: '/RPG/10.GAS初接入ASC与AttributeSet' },
     { text: '11. GameplayAbility基类与激活策略', link: '/RPG/11.GameplayAbility基类与激活策略' },
     { text: '12. 武器Actor基类与生成流程', link: '/RPG/12.武器Actor基类与生成流程' },
+    { text: '13. 武器生成GA蓝图逐节点接线', link: '/RPG/13.武器生成GA蓝图逐节点接线' },
   ],
 }
 
