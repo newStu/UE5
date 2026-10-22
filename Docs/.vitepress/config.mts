@@ -58,6 +58,7 @@ const warriorSidebar = {
     { text: '12. 武器Actor基类与生成流程', link: '/RPG/12.武器Actor基类与生成流程' },
     { text: '13. 武器生成GA蓝图逐节点接线', link: '/RPG/13.武器生成GA蓝图逐节点接线' },
     { text: '14. 启动数据资产与能力批量授予', link: '/RPG/14.启动数据资产与能力批量授予' },
+    { text: '15. 斧头上背：软引用加载与PossessedBy接线', link: '/RPG/15.斧头上背软引用加载与PossessedBy接线' },
   ],
 }
 
