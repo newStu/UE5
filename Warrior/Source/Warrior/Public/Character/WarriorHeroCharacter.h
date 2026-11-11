@@ -12,6 +12,7 @@ struct FInputActionValue;
 class UDataAsset_InputConfig;
 class SpringArmComponent;
 class UCameraComponent;
+class UHeroCombatComponent;
 
 
 
@@ -45,6 +46,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent * FollowCamera;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	UHeroCombatComponent* HeroCombatComponent;
+	
 #pragma endregion
 	
 #pragma region Input
@@ -55,4 +59,8 @@ private:
 	
 	void Input_Look(const FInputActionValue& InputActionValue);
 #pragma endregion 
+	
+	
+public:
+	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return  HeroCombatComponent; }
 };
