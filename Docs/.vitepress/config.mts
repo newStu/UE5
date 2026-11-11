@@ -61,6 +61,7 @@ const warriorSidebar = {
     { text: '15. 斧头上背：软引用加载与PossessedBy接线', link: '/RPG/15.斧头上背软引用加载与PossessedBy接线' },
     { text: '16. 战斗组件三层骨架与GetOwningPawn模板', link: '/RPG/16.战斗组件三层骨架与GetOwningPawn模板' },
     { text: '查阅：特殊语法速查', link: '/RPG/查阅-特殊语法速查' },
+    { text: '查阅：API速查', link: '/RPG/查阅-API速查' },
   ],
 }
 
