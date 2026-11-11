@@ -59,6 +59,7 @@ const warriorSidebar = {
     { text: '13. 武器生成GA蓝图逐节点接线', link: '/RPG/13.武器生成GA蓝图逐节点接线' },
     { text: '14. 启动数据资产与能力批量授予', link: '/RPG/14.启动数据资产与能力批量授予' },
     { text: '15. 斧头上背：软引用加载与PossessedBy接线', link: '/RPG/15.斧头上背软引用加载与PossessedBy接线' },
+    { text: '16. 战斗组件三层骨架与GetOwningPawn模板', link: '/RPG/16.战斗组件三层骨架与GetOwningPawn模板' },
   ],
 }
 
