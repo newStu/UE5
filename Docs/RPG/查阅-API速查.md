@@ -40,6 +40,8 @@
 - **`AddMappingContext(IMC, 优先级)`**（EnhancedInputLocalPlayerSubsystem）——挂输入映射上下文的标准路径；传 `nullptr` 静默无效；
 - **`BindAction(IA, TriggerEvent, 对象, 函数)`**（UEnhancedInputComponent）——输入绑定的正式接口；工程封装成了模板糖 `BindNativeInputAction`；
 - **`ETriggerEvent::Triggered`**——"按住期间持续触发"，移动/视角的常用档；
+- **`ETriggerEvent::Started` / `ETriggerEvent::Completed`**——按下瞬间、松开瞬间各触发一次的"两拍"档；按键式能力的标准配置，套 `Triggered` 会变成按住期间每帧请求激活；
+- **`BindAction` 的 payload 传参**——第 5 参起的实参原样透传进回调的参数表（可多个）；工程里把 InputTag 当 payload 传，统一的按下/松开回调靠参数分流所有能力输入，不必每个能力各写一个函数；
 - **`FInputActionValue::Get<T>()`**——模板取回 IA 的值（`Get<FVector2D>()`）；IA 配的值类型和 T 对不上时拿到零值，不动但不崩；
 - **`AddControllerYawInput / AddControllerPitchInput`**（APawn）——视角输入的转发口，喂给 PlayerController 的 ControlRotation；与 SpringArm 的 `bUsePawnControlRotation` 会师。
 
