@@ -63,7 +63,8 @@
 - **`Spec.IsActive()`**——即 `ActiveCount > 0`；授予瞬间恒为 false（"OnGiven 自动激活"那个取反 bug 的案发现场）；
 - **`GiveAbility(FGameplayAbilitySpec)`**（ASC）——正式授予接口；要求权威端调用（内部有所有权断言）；内部走到 `OnGiveAbility`；
 - **`FGameplayAbilitySpec`**——能力在系统里的"运行时凭证"：构造时填类，`SourceObject` 溯源（装备/Buff/地形的通用槽位）、`Level` 缩放口（cost/cooldown/效果可随等级变）；
-- **`GetAvatarActorFromActorInfo()`**（UGameplayAbility）——取 ActorInfo 缓存的 Avatar Actor（蓝图节点 Get Avatar Actor from Actor Info 的 C++ 面）。Avatar ≠ Owner：Owner 是逻辑归属（AI 场景下可能是 Controller），Avatar 是场上物理执行能力的实体。GA 里找"能力作用于谁身上的东西"，一律从它出发。
+- **`GetAvatarActorFromActorInfo()`**（UGameplayAbility）——取 ActorInfo 缓存的 Avatar Actor（蓝图节点 Get Avatar Actor from Actor Info 的 C++ 面）。Avatar ≠ Owner：Owner 是逻辑归属（AI 场景下可能是 Controller），Avatar 是场上物理执行能力的实体。GA 里找"能力作用于谁身上的东西"，一律从它出发；
+- **`CurrentActorInfo`**（UGameplayAbility 成员）——`FGameplayAbilityActorInfo*`，能力激活/授予时由 ASC 灌入的运行时信息包，getter 家族（GetAvatarActorFromActorInfo 等）包装的就是它。三个成员常被直取：`AvatarActor`（肉体 Actor）、`PlayerController`（InitAbilityActorInfo 时已缓存，比沿 Avatar → GetController 链找省一步）、`AbilitySystemComponent`（**TWeakObjectPtr 弱引用**，用前 IsValid）。直取成员省一层函数调用，是 GA 里取 Actor/Controller/ASC 的快捷口。
 
 ## 武器与生成挂接
 
