@@ -10,7 +10,8 @@
 - **`CreateDefaultSubobject<T>(TEXT("名"))`**——只能在构造函数里调用，为 CDO 创建组件；蓝图子类细节面板自动可见；
 - **`SetupAttachment(父组件, Socket名)`**——构造期挂接，晚调用静默无效；运行时改挂接要用 `AttachToComponent`；
 - **`GetRootComponent()` / `SetRootComponent()`**——取根 / 换根。注意 `SetRoot` 不是挂接：`SetRootComponent(GetRootComponent())` 是空操作；
-- **`GetCapsuleComponent()->InitCapsuleSize(半径, 半高)`**——定角色碰撞体尺寸。
+- **`GetCapsuleComponent()->InitCapsuleSize(半径, 半高)`**——定角色碰撞体尺寸；
+- **`FindComponentByClass<T>()`**（AActor 模板函数）——在 Actor 的组件树里按类取**第一个**匹配（含子类），没有返回 nullptr。留给"组件不是自己创建、指针不在手里"的场景——自己构造期创建的组件攥着指针走 getter 零查找，按类查找是到**别人身上**找东西的唯一通道。
 
 ## 移动与朝向
 
@@ -28,7 +29,8 @@
 
 - **`FGameplayTag`**——层级化 FName 标识符，全局注册表管理；`==` 精确比较（FName 级廉价），`MatchesTag` 父匹配（父标签匹配子标签）；
 - **`FGameplayTag::RequestGameplayTag(FName)`**——编辑器路线按名取标签，拼错返回空标签静默失效——核心标签走 Native 常量；
-- **`UDataAsset`**——"纯数据资产"基类：不存在世界里、可序列化的数据袋子；右键 Miscellaneous → Data Asset 建实例。"行为进 C++、配置进资产"的载体。
+- **`UDataAsset`**——"纯数据资产"基类：不存在世界里、可序列化的数据袋子；右键 Miscellaneous → Data Asset 建实例。"行为进 C++、配置进资产"的载体；
+- **`FGameplayTag::IsValid()`**——标签是否非空：未设置、`RequestGameplayTag` 拼错返回的都是空标签。"当前装备武器"这类可空字段判空就靠它——nullptr 是合法状态时只判空返回，不 assert。
 
 ## 输入管线
 
@@ -60,7 +62,8 @@
 - **`ClearAbility(SpecHandle)`**（ASC）——把能力从 ASC 移除，用后即焚只该对 OnGiven 策略用；
 - **`Spec.IsActive()`**——即 `ActiveCount > 0`；授予瞬间恒为 false（"OnGiven 自动激活"那个取反 bug 的案发现场）；
 - **`GiveAbility(FGameplayAbilitySpec)`**（ASC）——正式授予接口；要求权威端调用（内部有所有权断言）；内部走到 `OnGiveAbility`；
-- **`FGameplayAbilitySpec`**——能力在系统里的"运行时凭证"：构造时填类，`SourceObject` 溯源（装备/Buff/地形的通用槽位）、`Level` 缩放口（cost/cooldown/效果可随等级变）。
+- **`FGameplayAbilitySpec`**——能力在系统里的"运行时凭证"：构造时填类，`SourceObject` 溯源（装备/Buff/地形的通用槽位）、`Level` 缩放口（cost/cooldown/效果可随等级变）；
+- **`GetAvatarActorFromActorInfo()`**（UGameplayAbility）——取 ActorInfo 缓存的 Avatar Actor（蓝图节点 Get Avatar Actor from Actor Info 的 C++ 面）。Avatar ≠ Owner：Owner 是逻辑归属（AI 场景下可能是 Controller），Avatar 是场上物理执行能力的实体。GA 里找"能力作用于谁身上的东西"，一律从它出发。
 
 ## 武器与生成挂接
 
