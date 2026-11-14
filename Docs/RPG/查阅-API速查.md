@@ -56,6 +56,7 @@
 
 - **`PossessedBy(AController*)`**（APawn 虚函数）——每次被控制器接管都触发（对比 BeginPlay 一生一次）；GAS 双端初始化约定的服务端半边，`InitAbilityActorInfo` 的标准时机；
 - **`InitAbilityActorInfo(OwnerActor, AvatarActor)`**（ASC）——Owner = 逻辑/权威方，Avatar = 物理肉体；单机最简形态 `(this, this)`，AI/网络角色再分离；
+- **`GetAvatarActor()`**（ASC）——ASC 侧取肉身 Actor，授予时填 `SourceObject` 用的就是它；GA 侧等价物是 `GetAvatarActorFromActorInfo()`（走 ActorInfo 缓存）；
 - **`GetAbilitySystemComponent()`**（IAbilitySystemInterface 约定）——外部系统问 Actor 要 ASC 的统一入口，通用获取函数靠它工作；
 - **`GetActorLabel()`**——编辑器构建专属（依赖 UnrealEd），Shipping 编不过；打包环境的打印用 `GetName()`；
 - **`OnGiveAbility(ActorInfo, Spec)`**（UGameplayAbility 虚函数）——`GiveAbility` 落库时的回调，"授予的落点通知"；激活策略分岔在这里；
@@ -65,6 +66,7 @@
 - **`Spec.IsActive()`**——即 `ActiveCount > 0`；授予瞬间恒为 false（"OnGiven 自动激活"那个取反 bug 的案发现场）；
 - **`GiveAbility(FGameplayAbilitySpec)`**（ASC）——正式授予接口；要求权威端调用（内部有所有权断言）；内部走到 `OnGiveAbility`；
 - **`FGameplayAbilitySpec`**——能力在系统里的"运行时凭证"：构造时填类，`SourceObject` 溯源（装备/Buff/地形的通用槽位）、`Level` 缩放口（cost/cooldown/效果可随等级变）；
+- **`DynamicAbilityTags`**（FGameplayAbilitySpec 成员）——挂在"这一次授予凭证"上的标签容器，区别于 GA 类上的 AbilityTags（类固有、全体实例共享）：同一个 GA 类可带不同 tag 授予多份互不干扰。授予时 `AddTag(输入tag)` 写入，ASC 输入侧按"Spec 的 DynamicAbilityTags 含某输入 tag"反查要激活的能力——tag 匹配是老 InputID 机制的现行替代；
 - **`GetAvatarActorFromActorInfo()`**（UGameplayAbility）——取 ActorInfo 缓存的 Avatar Actor（蓝图节点 Get Avatar Actor from Actor Info 的 C++ 面）。Avatar ≠ Owner：Owner 是逻辑归属（AI 场景下可能是 Controller），Avatar 是场上物理执行能力的实体。GA 里找"能力作用于谁身上的东西"，一律从它出发；
 - **`CurrentActorInfo`**（UGameplayAbility 成员）——`FGameplayAbilityActorInfo*`，能力激活/授予时由 ASC 灌入的运行时信息包，getter 家族（GetAvatarActorFromActorInfo 等）包装的就是它。三个成员常被直取：`AvatarActor`（肉体 Actor）、`PlayerController`（InitAbilityActorInfo 时已缓存，比沿 Avatar → GetController 链找省一步）、`AbilitySystemComponent`（**TWeakObjectPtr 弱引用**，用前 IsValid）。直取成员省一层函数调用，是 GA 里取 Actor/Controller/ASC 的快捷口。
 
