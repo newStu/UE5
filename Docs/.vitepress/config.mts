@@ -64,6 +64,7 @@ const warriorSidebar = {
     { text: '18. 英雄GA子类与ASC直取通道', link: '/RPG/18.英雄GA子类与ASC直取通道' },
     { text: '19. 能力输入通道与按松双拍绑定', link: '/RPG/19.能力输入通道与按松双拍绑定' },
     { text: '20. 能力授予挂输入tag与DynamicAbilityTags', link: '/RPG/20.能力授予挂输入tag与DynamicAbilityTags' },
+    { text: '21. 能力输入通线：角色转发与ASC反查激活', link: '/RPG/21.能力输入通线角色转发与ASC反查激活' },
     { text: '查阅：特殊语法速查', link: '/RPG/查阅-特殊语法速查' },
     { text: '查阅：API速查', link: '/RPG/查阅-API速查' },
   ],

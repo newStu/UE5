@@ -30,7 +30,8 @@
 - **`FGameplayTag`**——层级化 FName 标识符，全局注册表管理；`==` 精确比较（FName 级廉价），`MatchesTag` 父匹配（父标签匹配子标签）；
 - **`FGameplayTag::RequestGameplayTag(FName)`**——编辑器路线按名取标签，拼错返回空标签静默失效——核心标签走 Native 常量；
 - **`UDataAsset`**——"纯数据资产"基类：不存在世界里、可序列化的数据袋子；右键 Miscellaneous → Data Asset 建实例。"行为进 C++、配置进资产"的载体；
-- **`FGameplayTag::IsValid()`**——标签是否非空：未设置、`RequestGameplayTag` 拼错返回的都是空标签。"当前装备武器"这类可空字段判空就靠它——nullptr 是合法状态时只判空返回，不 assert。
+- **`FGameplayTag::IsValid()`**——标签是否非空：未设置、`RequestGameplayTag` 拼错返回的都是空标签。"当前装备武器"这类可空字段判空就靠它——nullptr 是合法状态时只判空返回，不 assert；
+- **`HasTagExact` / `HasTag`**（FGameplayTagContainer）——前者只认一字不差的精确匹配；后者允许层级匹配，容器里的**父标签**会匹配子级查询。输入 tag 反查 Spec 用精确版：tag 是逐字配对的名牌不是层级分类，父级误伤（Spec 上挂了个光秃秃的父标签）要在这一行杜绝。
 
 ## 输入管线
 
@@ -62,6 +63,7 @@
 - **`OnGiveAbility(ActorInfo, Spec)`**（UGameplayAbility 虚函数）——`GiveAbility` 落库时的回调，"授予的落点通知"；激活策略分岔在这里；
 - **`EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled)`**（UGameplayAbility 虚函数）——结束回调；蓝图侧硬约定"逻辑走完必须调"，不调则 spec 永远处于激活态；
 - **`TryActivateAbility(SpecHandle)`**（ASC）——请求激活能力；
+- **`GetActivatableAbilities()`**（ASC）——已授予 Spec 容器的 const 引用（内部就是 AbilitySpecs 数组），ASC 输入侧反查的遍历源：逐份检查 `DynamicAbilityTags.HasTagExact(输入tag)`，命中拿 `Spec.Handle` 去 `TryActivateAbility`。数量级是"角色几十个能力"，线性扫足够，不值得建 tag→Spec 缓存表；
 - **`ClearAbility(SpecHandle)`**（ASC）——把能力从 ASC 移除，用后即焚只该对 OnGiven 策略用；
 - **`Spec.IsActive()`**——即 `ActiveCount > 0`；授予瞬间恒为 false（"OnGiven 自动激活"那个取反 bug 的案发现场）；
 - **`GiveAbility(FGameplayAbilitySpec)`**（ASC）——正式授予接口；要求权威端调用（内部有所有权断言）；内部走到 `OnGiveAbility`；
